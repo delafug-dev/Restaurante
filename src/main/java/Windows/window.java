@@ -1,6 +1,8 @@
 package Windows;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 
 public class window {
 
@@ -11,16 +13,33 @@ public class window {
 
         window.setSize(1200, 800); // indicar tamaño de la ventana
 
-        JButton empleado = new JButton("EMPLEADO");//creating instance of JButton
-        empleado.setBounds(130,100,100, 40);//x axis, y axis, width, height from button
+        window.setLayout(new GridLayout(0, 4));
 
-        JButton cliente = new JButton("CLIENTE");
-        cliente.setBounds(160,100,100,40);
-
-        window.add(empleado);//adding button in JFrame
+        JButton boton_cliente, boton_camarero, boton_cocinero, boton_administrador;
+        boton_cliente = new JButton();
+        boton_camarero = new JButton();
+        boton_cocinero = crearBotonCocinero();
+        boton_administrador = new JButton();
+        boton_cliente.setPreferredSize(new Dimension(50,10));
+        boton_camarero.setPreferredSize(new Dimension(50,10));
+        boton_cocinero.setPreferredSize(new Dimension(50,10));
+        boton_administrador.setPreferredSize(new Dimension(50,10));
+        window.add(boton_administrador);
+        window.add(boton_cliente);
+        window.add(boton_camarero);
+        window.add(boton_cocinero);
 
 
         window.setVisible(true);// Se usa para que se vea
+    }
+
+    private static JButton crearBotonCocinero(){
+        JButton boton = new JButton("Cocinero");
+        String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
+        ImageIcon imagenCocinero = new ImageIcon(ruta);
+        boton.setIcon(imagenCocinero);
+        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
     }
 
 
