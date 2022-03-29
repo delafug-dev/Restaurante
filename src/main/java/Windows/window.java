@@ -1,12 +1,16 @@
 package Windows;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class window {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
