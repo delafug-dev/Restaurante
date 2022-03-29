@@ -38,7 +38,8 @@ public class window {
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
         ImageIcon imagenCocinero = new ImageIcon(ruta);
         boton.setIcon(imagenCocinero);
-        imagenCocinero.getIconHeight();
+        Image cambiar_tamayo = imagenCocinero.getImage().getScaledInstance(400,800, Image.SCALE_SMOOTH);
+        imagenCocinero.setImage(cambiar_tamayo);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
