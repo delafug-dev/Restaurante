@@ -48,7 +48,7 @@ public class window {
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cliente.jpg";
         ImageIcon imagenCliente = new ImageIcon(ruta);
         boton.setIcon(imagenCliente);
-        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(35y0,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(35,800, Image.SCALE_SMOOTH);
         imagenCliente.setImage(cambiar_tamayo);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
