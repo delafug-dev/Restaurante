@@ -1,10 +1,9 @@
-
-CREATE DATABASE `restaurante` /*!40100 DEFAULT CHARACTER SET latin1 */;
+create or REPLACE DATABASE `restaurante` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 
 create table empleado(
 	id int(10) not null auto_increment,
-	codigo_empleado varchar(5),
+	codigo_empleado varchar(10),
 	nombre varchar(50) not null,
 	apellidos varchar(100) not  null,
 	primary key (id)
@@ -20,7 +19,7 @@ create table mesa(
 create table producto(
 	id int(10) not null auto_increment,
 	descripcion varchar(150) not null,
-	tipo int(1) not null,
+	tipo int(1),
 	tipo_producto varchar(50) not null,
 	primary key (id)
 );
@@ -38,7 +37,7 @@ create table tipo_plato_producto(
 
 create table comanda(
 	id int(10) not null auto_increment,
-	codigo_comanda varchar(5),
+	codigo_comanda varchar(10),
 	id_mesa int(10) not null,
 	id_empleado int(10) not  null,
 	primary key (id),
@@ -54,4 +53,3 @@ create table linea_comanda(
 	constraint comanda_fk3 foreign key (id_comanda) references comanda(id),
 	constraint producto_fk4 foreign key (id_producto) references producto(id)
 );
-
