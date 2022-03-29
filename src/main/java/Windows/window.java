@@ -41,6 +41,7 @@ public class window {
         Image cambiar_tamayo = imagenCocinero.getImage().getScaledInstance(400,800, Image.SCALE_SMOOTH);
         imagenCocinero.setImage(cambiar_tamayo);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
+        // hola
         return boton;
     }
     private static JButton crearBotonCliente(){
