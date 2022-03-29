@@ -1,6 +1,5 @@
 create or REPLACE DATABASE `restaurante` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-
 create table empleado(
 	id int(10) not null auto_increment,
 	codigo_empleado varchar(10),
@@ -19,8 +18,8 @@ create table mesa(
 create table producto(
 	id int(10) not null auto_increment,
 	descripcion varchar(150) not null,
-	tipo int(1),
-	tipo_producto varchar(50) not null,
+	tipo int(1) not null, -- Ración o Bebida grande (1), Media ración o Bebida mediana (2), Tapa o Bebida pequeña (3) --
+	tipo_producto int(1) not null, -- comida (1), bebida (2) --
 	primary key (id)
 );
 
@@ -32,6 +31,16 @@ create table tipo_plato_producto(
 	id_producto int(10) not null,
 	primary key (id),
 	constraint producto_fk2 foreign key(id_producto) references producto(id)
+);
+
+create table tipo_bebida_producto(
+id int(10) not null auto_increment,
+bebida_pequeña double not null,
+bebida_media double not null,
+bebida_grande double not null,
+id_producto int(10) not null,
+primary key (id),
+constraint producto_fk3 foreign key (id_producto) references producto(id)
 );
 
 
@@ -53,3 +62,4 @@ create table linea_comanda(
 	constraint comanda_fk3 foreign key (id_comanda) references comanda(id),
 	constraint producto_fk4 foreign key (id_producto) references producto(id)
 );
+
