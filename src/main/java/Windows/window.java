@@ -38,6 +38,32 @@ public class window {
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
         ImageIcon imagenCocinero = new ImageIcon(ruta);
         boton.setIcon(imagenCocinero);
+        imagenCocinero.getIconHeight();
+        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+    private static JButton crearBotonCliente(){
+        JButton boton = new JButton("Cliente");
+        String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
+        ImageIcon imagenCocinero = new ImageIcon(ruta);
+        boton.setIcon(imagenCocinero);
+        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+    private static JButton crearBotonCamarero(){
+        JButton boton = new JButton("Camarero");
+        String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
+        ImageIcon imagenCocinero = new ImageIcon(ruta);
+        boton.setIcon(imagenCocinero);
+        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+
+    private static JButton crearBotonAdministrador(){
+        JButton boton = new JButton("Admnistrador");
+        String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
+        ImageIcon imagenCocinero = new ImageIcon(ruta);
+        boton.setIcon(imagenCocinero);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
