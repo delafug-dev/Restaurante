@@ -1,11 +1,13 @@
 package Windows;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 
 public class window {
 
@@ -23,11 +25,11 @@ public class window {
         boton_cliente = crearBotonCliente();
         boton_camarero = crearBotonCamarero();
         boton_cocinero = crearBotonCocinero();
-        boton_administrador = new JButton();
-        boton_cliente.setPreferredSize(new Dimension(50,10));
-        boton_camarero.setPreferredSize(new Dimension(50,10));
-        boton_cocinero.setPreferredSize(new Dimension(50,10));
-        boton_administrador.setPreferredSize(new Dimension(50,10));
+        boton_administrador = crearBotonAdministrador();
+        boton_cliente.setPreferredSize(new Dimension(300,1000));
+        boton_camarero.setPreferredSize(new Dimension(300,300));
+        boton_cocinero.setPreferredSize(new Dimension(300,300));
+        boton_administrador.setPreferredSize(new Dimension(300,300));
         window.add(boton_cliente);
         window.add(boton_camarero);
         window.add(boton_cocinero);
@@ -37,43 +39,72 @@ public class window {
     }
 
     private static JButton crearBotonCocinero(){
-        JButton boton = new JButton("Cocinero");
+
+        Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
         ImageIcon imagenCocinero = new ImageIcon(ruta);
-        boton.setIcon(imagenCocinero);
         Image cambiar_tamayo = imagenCocinero.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
         imagenCocinero.setImage(cambiar_tamayo);
+        JButton boton = new JButton("Cocinero",imagenCocinero);
+        boton.setHorizontalTextPosition(SwingConstants.CENTER);
+        boton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        boton.setBorder(new EmptyBorder(0, 20, 80, 20));
+        boton.setFont(fuente);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(Color.BLACK);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         // hola
         return boton;
     }
     private static JButton crearBotonCliente(){
-        JButton boton = new JButton("Cliente");
+        //Border empty = BorderFactory.createEmptyBorder(); Quitar borde en pantalla grande solamente
+        Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cliente.jpg";
         ImageIcon imagenCliente = new ImageIcon(ruta);
-        boton.setIcon(imagenCliente);
-        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(35,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(400,800, Image.SCALE_SMOOTH);
         imagenCliente.setImage(cambiar_tamayo);
+        JButton boton = new JButton("Cliente",imagenCliente);
+        boton.setHorizontalTextPosition(SwingConstants.CENTER);
+        boton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        boton.setBorder(new EmptyBorder(0, 20, 80, 20));
+        boton.setFont(fuente);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(Color.BLACK);
+        //boton.setBorder(empty); BorderFactory
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
     private static JButton crearBotonCamarero(){
-        JButton boton = new JButton("Camarero");
+        Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\camarero.jpg";
         ImageIcon imagenCamarero = new ImageIcon(ruta);
-        boton.setIcon(imagenCamarero);
         Image cambiar_tamayo = imagenCamarero.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
         imagenCamarero.setImage(cambiar_tamayo);
+        JButton boton = new JButton("Camarero",imagenCamarero);
+        boton.setHorizontalTextPosition(SwingConstants.CENTER);
+        boton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        boton.setBorder(new EmptyBorder(0, 20, 80, 20));
+        boton.setFont(fuente);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(Color.BLACK);
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
 
     private static JButton crearBotonAdministrador(){
-        JButton boton = new JButton("Admnistrador");
-        String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
-        ImageIcon imagenCocinero = new ImageIcon(ruta);
-        boton.setIcon(imagenCocinero);
-        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        Font fuente=new Font("Arial", Font.ITALIC, 30);
+        String ruta = new File("").getAbsolutePath()+"\\imagenes\\admin.jpg";
+        ImageIcon imagenAdmin = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenAdmin.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
+        imagenAdmin.setImage(cambiar_tamayo);
+        JButton boton = new JButton("Administrador",imagenAdmin);
+        boton.setHorizontalTextPosition(SwingConstants.CENTER);
+        boton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        boton.setBorder(new EmptyBorder(0, 20, 80, 20));
+        boton.setFont(fuente);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(Color.BLACK);
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
 
