@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class window {
         boton_camarero = crearBotonCamarero();
         boton_cocinero = crearBotonCocinero();
         boton_administrador = crearBotonAdministrador();
-        boton_cliente.setPreferredSize(new Dimension(300,1000));
+        boton_cliente.setPreferredSize(new Dimension(300,100));
         boton_camarero.setPreferredSize(new Dimension(300,300));
         boton_cocinero.setPreferredSize(new Dimension(300,300));
         boton_administrador.setPreferredSize(new Dimension(300,300));
@@ -52,12 +54,17 @@ public class window {
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cocinero");
+            }
+        });
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         // hola
         return boton;
     }
     private static JButton crearBotonCliente(){
-        //Border empty = BorderFactory.createEmptyBorder(); Quitar borde en pantalla grande solamente
+        Border empty = BorderFactory.createEmptyBorder();
         Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cliente.jpg";
         ImageIcon imagenCliente = new ImageIcon(ruta);
@@ -70,7 +77,12 @@ public class window {
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
-        //boton.setBorder(empty); BorderFactory
+        boton.setBorder(empty);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cliente");
+            }
+        });
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
@@ -87,6 +99,11 @@ public class window {
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón camarero");
+            }
+        });
         //boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
@@ -104,6 +121,11 @@ public class window {
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón admin");
+            }
+        });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
