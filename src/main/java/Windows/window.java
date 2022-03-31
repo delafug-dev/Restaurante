@@ -13,6 +13,8 @@ import java.sql.Time;
 
 public class window {
 
+    private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+
     public static void main(String[] args){
 
         // Guía layouts (hacer la ventana que cambie de tamaño)
@@ -21,9 +23,13 @@ public class window {
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
 
-        window.setSize(1200, 800); // indica tamaño de la ventana
+        window.setResizable(false);
+
+        window.setSize(pantalla); // indica tamaño de la ventana
 
         window.setLayout(new GridLayout(0, 4)); // Indico el layout del panel pricipal de 4 columnas
+
+        // window.setPreferredSize(new Dimension(1366,768));
 
         JButton boton_cliente, boton_camarero, boton_cocinero, boton_administrador;
         boton_cliente = crearBotonCliente();
@@ -47,7 +53,7 @@ public class window {
         Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cocina.jpg";
         ImageIcon imagenCocinero = new ImageIcon(ruta);
-        Image cambiar_tamayo = imagenCocinero.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenCocinero.getImage().getScaledInstance(500, pantalla.height, Image.SCALE_SMOOTH);
         imagenCocinero.setImage(cambiar_tamayo);
         JButton boton = new JButton("Cocinero",imagenCocinero);
         boton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -66,11 +72,11 @@ public class window {
         return boton;
     }
     private static JButton crearBotonCliente(){
-        Border empty = BorderFactory.createEmptyBorder();
+        // Border empty = BorderFactory.createEmptyBorder();
         Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\cliente.jpg";
         ImageIcon imagenCliente = new ImageIcon(ruta);
-        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(400,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenCliente.getImage().getScaledInstance(400,pantalla.height, Image.SCALE_SMOOTH);
         imagenCliente.setImage(cambiar_tamayo);
         JButton boton = new JButton("Cliente",imagenCliente);
         boton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -79,7 +85,7 @@ public class window {
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
-        boton.setBorder(empty);
+        // boton.setBorder(empty);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Se ha pulsado el botón cliente");
@@ -92,7 +98,7 @@ public class window {
         Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\camarero.jpg";
         ImageIcon imagenCamarero = new ImageIcon(ruta);
-        Image cambiar_tamayo = imagenCamarero.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenCamarero.getImage().getScaledInstance(500,pantalla.height, Image.SCALE_SMOOTH);
         imagenCamarero.setImage(cambiar_tamayo);
         JButton boton = new JButton("Camarero",imagenCamarero);
         boton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -114,7 +120,7 @@ public class window {
         Font fuente=new Font("Arial", Font.ITALIC, 30);
         String ruta = new File("").getAbsolutePath()+"\\imagenes\\admin.jpg";
         ImageIcon imagenAdmin = new ImageIcon(ruta);
-        Image cambiar_tamayo = imagenAdmin.getImage().getScaledInstance(500,800, Image.SCALE_SMOOTH);
+        Image cambiar_tamayo = imagenAdmin.getImage().getScaledInstance(500,pantalla.height, Image.SCALE_SMOOTH);
         imagenAdmin.setImage(cambiar_tamayo);
         JButton boton = new JButton("Administrador",imagenAdmin);
         boton.setHorizontalTextPosition(SwingConstants.CENTER);
