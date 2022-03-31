@@ -13,8 +13,10 @@ import java.sql.Time;
 
 public class window {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
+        // Guía layouts (hacer la ventana que cambie de tamaño)
+        // https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
