@@ -67,7 +67,7 @@ public class window {
                 System.out.println("Se ha pulsado el botón cocinero");
             }
         });
-        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
         // hola
         return boton;
     }
@@ -134,7 +134,7 @@ public class window {
                 System.out.println("Se ha pulsado el botón admin");
             }
         });
-        // boton.addActionListener(new AccionAbrirMenuCocinero());
+       // boton.addActionListener(new administrador());
         return boton;
     }
 
