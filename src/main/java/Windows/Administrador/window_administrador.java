@@ -5,38 +5,134 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+
 public class window_administrador {
+    private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+    private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
+
     public static void main(String[] args) throws IOException {
+
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
+
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
+        window.setSize(pantalla); // indica tamaño de la ventana
 
-        window.setSize(1200, 800); // indicar tamaño de la ventana
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 0));
-        panel.setBounds(500, 350, 200, 50);
-        JPanel panel2 = new JPanel();
+        JPanel panel = pane();
+        JPanel panel2 = pane2();
+        JPanel panel12 = pane3();
+        JPanel fondo = crearPanelImagenFondo();
 
-        panel2.setLayout(new GridLayout(1,0));
-
-        panel2.setBounds(500, 300, 200, 50);
-        JPanel panel3 = new JPanel();
-        panel3.setBackground(Color.cyan);
-        //panel.add(Box.createRigidArea(new Dimension(0, 500)));
         JButton boton_empleado, boton_productos, boton_mesas;
-        boton_empleado = new JButton("Empleado");
-        boton_productos = new JButton("Producto");
-        boton_mesas = new JButton("Mesas");
+        boton_empleado = crearBotonEmpleado();
+        boton_productos = crearBotonProducto();
+        boton_mesas = crearBotonMesa();
         panel.add(boton_empleado);
         panel2.add(boton_productos);
-        panel2.add(boton_mesas);
-
+        panel12.add(boton_mesas);
         window.add(panel);
         window.add(panel2);
-        window.add(panel3);
-        window.setVisible(true);
+        window.add(panel12);
+        window.add(fondo);
 
+        window.setVisible(true);
     }
+    private static String rutaDeImagen(){
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\administrador.jpg";
+        return ruta;
+    }
+    private static JPanel crearPanelImagenFondo(){
+        JPanel panel = new JPanel(new BorderLayout()){
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagenFondo.getImage(), 0, 0, null);
+            }
+        };
+        return panel;
+    }
+
+    private static JPanel pane (){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(450, 320, 400, 100);
+    return panel;
+    }
+
+    private static JPanel pane2 (){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(450, 200, 400, 100);
+        return panel;
+    }
+
+    private static JPanel pane3 (){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(450, 440, 400, 100);
+        return panel;
+    }
+
+        private static JButton crearBotonEmpleado() {
+
+            JButton boton = new JButton("Empleado");
+            String ruta = new File("").getAbsolutePath() + "\\imagenes\\empleado.png";
+            ImageIcon imagenEmpleado = new ImageIcon(ruta);
+            Image cambiar_tamayo = imagenEmpleado.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            imagenEmpleado.setImage(cambiar_tamayo);
+            boton.setIcon(imagenEmpleado);
+
+            boton.setFocusPainted(false);
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Se ha pulsado el botón cocinero");
+                }
+            });
+            // boton.addActionListener(new AccionAbrirMenuCocinero());
+            return boton;
+        }
+
+    private static JButton crearBotonMesa() {
+
+        JButton boton = new JButton("Mesas");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\mesa.png";
+        ImageIcon imagenMesa = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenMesa.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        imagenMesa.setImage(cambiar_tamayo);
+        boton.setIcon(imagenMesa);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cocinero");
+            }
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+
+    private static JButton crearBotonProducto() {
+
+        JButton boton = new JButton("Productos");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\producto.png";
+        ImageIcon imagenProducto = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenProducto.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenProducto.setImage(cambiar_tamayo);
+        boton.setIcon(imagenProducto);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cocinero");
+            }
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+
+
+
 }

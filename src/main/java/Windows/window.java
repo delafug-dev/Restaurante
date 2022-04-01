@@ -68,7 +68,6 @@ public class window {
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
-        // hola
         return boton;
     }
     private static JButton crearBotonCliente(){
