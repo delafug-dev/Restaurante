@@ -1,6 +1,6 @@
 package Windows;
 
-import Windows.Administrador.window_administrador;
+import Windows.Administrador.Window_administrador;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class window extends JFrame{
+public class Window extends JFrame{
 
     private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
 
-    public window(){
+    public Window(){
 
         // Guía layouts (hacer la ventana que cambie de tamaño)
         // https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
@@ -137,7 +137,7 @@ public class window extends JFrame{
 
     static class accion_administrador implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            new window_administrador();
+            new Window_administrador();
         }
     }
 

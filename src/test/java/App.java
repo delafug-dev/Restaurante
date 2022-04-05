@@ -1,12 +1,9 @@
-import javax.swing.*;
-import java.awt.*;
-
-import Windows.window;
+import Windows.Window;
 
 public class App {
 
     public static void main(String[] args) {
 
-        new window();
+        new Window();
     }
 }
