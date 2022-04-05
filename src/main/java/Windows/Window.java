@@ -1,6 +1,7 @@
 package Windows;
 
 import Windows.Administrador.Window_administrador;
+import Windows.camarero.Camarero;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -104,12 +105,7 @@ public class Window extends JFrame{
         boton.setFont(fuente);
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
-        boton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Se ha pulsado el botón camarero");
-            }
-        });
-        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new Window.accionCamarero());
         return boton;
     }
 
@@ -137,9 +133,14 @@ public class Window extends JFrame{
 
     static class accion_administrador implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
+
             new Window_administrador();
         }
     }
-
+    static class accionCamarero implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Camarero();
+        }
+    }
 
 }

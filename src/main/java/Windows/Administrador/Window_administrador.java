@@ -1,6 +1,7 @@
 package Windows.Administrador;
 
 import Windows.Window;
+import Windows.camarero.Camarero;
 
 import javax.swing.*;
 import java.awt.*;
@@ -126,17 +127,15 @@ public class Window_administrador extends JFrame {
         return boton;
     }
 
-    static class accionProductos implements ActionListener {
+    public static class accionProductos implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
             new Productos();
         }
     }
-    static class accionEmpleado implements ActionListener {
+    public static class accionEmpleado implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
             new Empleado();
         }
     }
-
-
 
 }
