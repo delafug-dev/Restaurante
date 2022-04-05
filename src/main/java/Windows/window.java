@@ -1,21 +1,19 @@
 package Windows;
-import javax.imageio.ImageIO;
+
+import Windows.Administrador.window_administrador;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.sql.Time;
 
-public class window {
+public class window extends JFrame{
 
     private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
 
-    public static void main(String[] args){
+    public window(){
 
         // Guía layouts (hacer la ventana que cambie de tamaño)
         // https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
@@ -133,8 +131,14 @@ public class window {
                 System.out.println("Se ha pulsado el botón admin");
             }
         });
-       // boton.addActionListener(new administrador());
+       boton.addActionListener(new accion_administrador());
         return boton;
+    }
+
+    static class accion_administrador implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new window_administrador();
+        }
     }
 
 

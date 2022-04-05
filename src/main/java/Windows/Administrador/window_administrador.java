@@ -11,11 +11,11 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class window_administrador {
+public class window_administrador extends JFrame {
     private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
-    public static void main(String[] args) throws IOException {
+    public window_administrador(){
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 

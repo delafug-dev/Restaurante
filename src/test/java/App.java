@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class app extends JFrame {
+import Windows.window;
+
+public class App {
 
     public static void main(String[] args) {
 
+        new window();
     }
-
 }
