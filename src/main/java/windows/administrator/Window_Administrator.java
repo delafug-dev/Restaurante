@@ -1,21 +1,17 @@
-package Windows.Administrador;
+package windows.administrator;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 
-public class window_administrador extends JFrame {
-    private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+public class Window_Administrator extends JFrame {
+    private static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
-    public window_administrador(){
+    public Window_Administrator(){
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
@@ -111,8 +107,11 @@ public class window_administrador extends JFrame {
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
+
+        boton.addActionListener(new Window_Administrator.accionmesas());
         return boton;
     }
+
 
     private static JButton crearBotonProducto() {
 
@@ -132,6 +131,11 @@ public class window_administrador extends JFrame {
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
+    static class accionmesas implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Mesas();
+    }
+}
 
 
 
