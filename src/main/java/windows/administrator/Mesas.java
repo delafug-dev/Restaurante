@@ -4,20 +4,20 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
 import static windows.Window.pantalla;
 
 public class Mesas extends JFrame {
 
     private static final ImageIcon imagenFondo = getRutaImagenFondo();
+    private static final Font fuente = new Font("Arial", Font.ITALIC | Font.BOLD, 45);
 
     JPanel panelPrincipal = crearPanelImagenFondo();
 
     public Mesas(){
         JPanel panelSuperior = new JPanel(new BorderLayout());
         JPanel formulario = new JPanel(new GridLayout(0, 1));
-        JPanel botones = new JPanel();
+        JPanel botones = new JPanel(new GridLayout(1, 4,10,10));
 
         // BOTONES
         JButton crear = new JButton("CREAR");
@@ -31,26 +31,44 @@ public class Mesas extends JFrame {
         botones.add(eliminar);
 
         formulario.setOpaque(false);
-        formulario.setSize(new Dimension(300, 300));
-        formulario.add(Box.createRigidArea(new Dimension(5, 0)));
-        formulario.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+        formulario.setLayout(new GridLayout(0, 2,10 ,20));
+        formulario.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
 
-        botones.setBounds(100,100,500,200);
+        JLabel etiquetaId = id();
+        JTextField fieldId = new JTextField();
+        etiquetaId.setLabelFor(fieldId);
+
+        JLabel etiquetaNumMesa = num_mesa();
+        JTextField fieldNumMesa = new JTextField();
+        etiquetaNumMesa.setLabelFor(fieldNumMesa);
+
+        JLabel etiquetaNumComensales = num_comensales();
+        JTextField fieldNumComensales = new JTextField();
+        etiquetaNumComensales.setLabelFor(fieldNumComensales);
+
+        formulario.add(id());
+        formulario.add(fieldId);
+        formulario.add(num_mesa());
+        formulario.add(fieldNumMesa);
+        formulario.add(num_comensales());
+        formulario.add(fieldNumComensales);
+
+
+        botones.setPreferredSize(new Dimension(100,100));
         botones.setOpaque(false);
+        botones.setBorder(BorderFactory.createEmptyBorder(0,15,25,15));
 
         panelSuperior.setSize(new Dimension(700, 700));
         panelSuperior.setBorder(new EmptyBorder(100,100,100,100));
         panelSuperior.setOpaque(false);
-        panelSuperior.add(formulario, BorderLayout.CENTER);
+        panelSuperior.add(formulario);
 
         panelPrincipal.add(panelSuperior, BorderLayout.CENTER);
         panelPrincipal.add(botones, BorderLayout.SOUTH);
 
-
         // CONFIGURACIÓN DEL PANEL
         setContentPane(panelPrincipal);
         setBackground(Color.DARK_GRAY);
-        setLocationRelativeTo(null); // POSICION CENTRADA
         pack();
         setSize(pantalla);
         setResizable(false);
@@ -63,7 +81,6 @@ public class Mesas extends JFrame {
                 super.paintComponent(g);
                 g.drawImage(imagenFondo.getImage(), 0, 0, null);
             }
-
         };
         return panel;
     }
@@ -72,31 +89,31 @@ public class Mesas extends JFrame {
         String ruta = new File("").getAbsolutePath() + "\\imagenes\\mesas.jpg";
         ImageIcon imagenMesa = new ImageIcon(ruta);
         Image cambiar_tamayo = imagenMesa.getImage()
-                .getScaledInstance(1400,
-                        pantalla.height,
-                        Image.SCALE_SMOOTH);
+                .getScaledInstance(1400, pantalla.height, Image.SCALE_SMOOTH);
         imagenMesa.setImage(cambiar_tamayo);
         return imagenMesa;
     }
 
-    private List<JButton> botonesFormularios (){
-        List<JButton> botonesLista = new ArrayList<>();
-
-        // CREAR
-        JButton crear = new JButton("CREAR");
-
-        // BUSCAR
-        JButton buscar = new JButton("BUSCAR");
-
-
-        JButton modificar = new JButton("MODIFICAR");
-        JButton eliminar = new JButton("ELIMINAR");
-
-        botonesLista.add(crear);
-        botonesLista.add(buscar);
-        botonesLista.add(modificar);
-        botonesLista.add(eliminar);
-        return botonesLista;
+    public static JLabel id(){
+        JLabel id = new JLabel();
+        id.setFont(fuente);
+        id.setText("ID");
+        id.setForeground(Color.WHITE);
+        return id;
     }
+    public static JLabel num_mesa(){
+        JLabel num_mesa = new JLabel();
+        num_mesa.setFont(fuente);
+        num_mesa.setText("Nº MESA");
+        num_mesa.setForeground(Color.WHITE);
+        return num_mesa;
+    }
+    public static JLabel num_comensales(){
+        JLabel num_comensales = new JLabel();
+        num_comensales.setFont(fuente);
+        num_comensales.setText("DESCRIPCIÓN");
 
+        num_comensales.setForeground(Color.WHITE);
+        return num_comensales;
+    }
 }
