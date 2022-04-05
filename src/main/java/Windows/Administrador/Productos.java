@@ -16,7 +16,6 @@ public class Productos extends JFrame{
 
     public Productos() {
 
-
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
         window.setSize(pantalla); // indica tamaño de la ventana
 
