@@ -19,11 +19,12 @@ public class Productos extends JFrame{
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
         window.setSize(pantalla); // indica tamaño de la ventana
+
         JPanel panel = panel1();
         panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
         panel.setOpaque(false);
+
         JPanel panel2 = panel2();
-        JPanel panelid = new JPanel();
         JPanel fondo = crearPanelImagenFondo();
 
         JButton boton_crear, boton_modificar, boton_eliminar, boton_buscar;
