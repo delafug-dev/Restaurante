@@ -1,6 +1,7 @@
 package windows;
 
 import windows.administrator.Window_Administrator;
+import windows.cocinero.Window_Cocinero;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -65,8 +66,14 @@ public class Window extends JFrame {
                 System.out.println("Se ha pulsado el botón cocinero");
             }
         });
-        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new accion_cocinero());
         return boton;
+    }
+
+    static class accion_cocinero implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Window_Cocinero();
+        }
     }
 
     private static JButton crearBotonCliente() {
