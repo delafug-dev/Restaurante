@@ -1,6 +1,7 @@
 package windows.camarero;
 
 import windows.administrator.Empleado;
+import windows.administrator.Productos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -133,6 +134,7 @@ import java.io.File;
         }
         static class accionEmpleado implements ActionListener {
             public void actionPerformed(ActionEvent ae) {
+
                 new Empleado();
             }
         }

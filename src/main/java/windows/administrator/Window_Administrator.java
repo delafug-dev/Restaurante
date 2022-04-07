@@ -89,7 +89,7 @@ public class Window_Administrator extends JFrame {
                     System.out.println("Se ha pulsado el botón cocinero");
                 }
             });
-            // boton.addActionListener(new AccionAbrirMenuCocinero());
+            boton.addActionListener(new Window_Administrator.accionempleado());
             return boton;
         }
 
@@ -130,7 +130,7 @@ public class Window_Administrator extends JFrame {
                 System.out.println("Se ha pulsado el botón cocinero");
             }
         });
-        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new Window_Administrator.accionproducto());
         return boton;
     }
     static class accionmesas implements ActionListener {
@@ -138,6 +138,17 @@ public class Window_Administrator extends JFrame {
             new windows.administrator.Mesas();
     }
 }
+    static class accionproducto implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new windows.administrator.Productos();
+        }
+    }
+    static class accionempleado implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new windows.administrator.Empleado();
+        }
+    }
+
 
 
 
