@@ -8,7 +8,6 @@ import java.io.File;
 
 import static windows.Window.pantalla;
 
-
 public class Window_Administrator extends JFrame {
 
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
@@ -29,9 +28,11 @@ public class Window_Administrator extends JFrame {
         boton_empleado = crearBotonEmpleado();
         boton_productos = crearBotonProducto();
         boton_mesas = crearBotonMesa();
+
         panel.add(boton_empleado);
         panel2.add(boton_productos);
         panel12.add(boton_mesas);
+
         window.add(panel);
         window.add(panel2);
         window.add(panel12);
@@ -148,8 +149,4 @@ public class Window_Administrator extends JFrame {
             new windows.administrator.Empleado();
         }
     }
-
-
-
-
 }
