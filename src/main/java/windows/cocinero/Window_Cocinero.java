@@ -21,10 +21,11 @@ public class Window_Cocinero extends JFrame{
 
         // JButtons
         JButton comandasButton = new JButton("COMANDAS", icono_comanda());
+        comandasButton.setOpaque(false);
         comanda.add(comandasButton);
 
         comanda.setPreferredSize(new Dimension(500,500));
-        comanda.setBorder(BorderFactory.createEmptyBorder(150,220,150,220));
+        comanda.setBorder(BorderFactory.createEmptyBorder(200,250,200,250));
         window_cocinero.setSize(new Dimension(100,100));
         window_cocinero.setBorder(new EmptyBorder(100,100,100,100));
         comanda.setOpaque(false);
