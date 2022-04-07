@@ -1,11 +1,8 @@
 package windows.cocinero;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.io.File;
-
 import static windows.Window.pantalla;
 
 public class Window_Cocinero extends JFrame{
@@ -32,8 +29,6 @@ public class Window_Cocinero extends JFrame{
         window_cocinero.add(comanda);
         window_cocinero.setOpaque(false);
         panelPrincipal.add(window_cocinero, BorderLayout.CENTER);
-
-
 
 
         // Configuración Window_Cocinero
