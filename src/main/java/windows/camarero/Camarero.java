@@ -14,7 +14,7 @@ import static windows.Window.pantalla;
 
 public class Camarero  extends JFrame {
 
-        private static final ImageIcon imagenFondo = rutaDeImagen();
+        private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
         public Camarero(){
 
@@ -29,9 +29,9 @@ public class Camarero  extends JFrame {
             JPanel fondo = crearPanelImagenFondo();
 
             JButton boton_empleado, boton_productos, boton_mesas;
-            boton_empleado = crearBotonAforo();
-            boton_productos = crearBotonPedidos();
-            boton_mesas = crearBotonCuenta();
+            boton_empleado = crearBotonEmpleado();
+            boton_productos = crearBotonProducto();
+            boton_mesas = crearBotonMesa();
             panel.add(boton_empleado);
             panel2.add(boton_productos);
             panel12.add(boton_mesas);
@@ -42,13 +42,9 @@ public class Camarero  extends JFrame {
 
             window.setVisible(true);
         }
-        private static ImageIcon rutaDeImagen(){
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\camarerofondo.jpg";
-            ImageIcon imagenMesa = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenMesa.getImage()
-                    .getScaledInstance(1400, pantalla.height, Image.SCALE_SMOOTH);
-            imagenMesa.setImage(cambiar_tamayo);
-            return imagenMesa;
+        private static String rutaDeImagen(){
+            String ruta = new File("").getAbsolutePath() + "\\imagenes\\administrador.jpg";
+            return ruta;
         }
         private static JPanel crearPanelImagenFondo(){
             JPanel panel = new JPanel(new BorderLayout()){
@@ -63,30 +59,30 @@ public class Camarero  extends JFrame {
         private static JPanel pane (){
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(100, 320, 400, 100);
+            panel.setBounds(450, 320, 400, 100);
             return panel;
         }
 
         private static JPanel pane2 (){
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(100, 200, 400, 100);
+            panel.setBounds(450, 200, 400, 100);
             return panel;
         }
 
         private static JPanel pane3 (){
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(100, 440, 400, 100);
+            panel.setBounds(450, 440, 400, 100);
             return panel;
         }
 
-        private static JButton crearBotonAforo() {
+        private static JButton crearBotonEmpleado() {
 
-            JButton boton = new JButton("Aforo");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\aforo.png";
+            JButton boton = new JButton("Empleado");
+            String ruta = new File("").getAbsolutePath() + "\\imagenes\\empleado.png";
             ImageIcon imagenEmpleado = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenEmpleado.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Image cambiar_tamayo = imagenEmpleado.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             imagenEmpleado.setImage(cambiar_tamayo);
             boton.setIcon(imagenEmpleado);
 
@@ -101,12 +97,12 @@ public class Camarero  extends JFrame {
             return boton;
         }
 
-        private static JButton crearBotonPedidos() {
+        private static JButton crearBotonMesa() {
 
-            JButton boton = new JButton("Pedidos");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\pedido.png";
+            JButton boton = new JButton("Mesas");
+            String ruta = new File("").getAbsolutePath() + "\\imagenes\\mesa.png";
             ImageIcon imagenMesa = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenMesa.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Image cambiar_tamayo = imagenMesa.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             imagenMesa.setImage(cambiar_tamayo);
             boton.setIcon(imagenMesa);
 
@@ -119,10 +115,10 @@ public class Camarero  extends JFrame {
             return boton;
         }
 
-        private static JButton crearBotonCuenta() {
+        private static JButton crearBotonProducto() {
 
-            JButton boton = new JButton("Cuenta");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\factura.png";
+            JButton boton = new JButton("Productos");
+            String ruta = new File("").getAbsolutePath() + "\\imagenes\\producto.png";
             ImageIcon imagenProducto = new ImageIcon(ruta);
             Image cambiar_tamayo = imagenProducto.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             imagenProducto.setImage(cambiar_tamayo);
