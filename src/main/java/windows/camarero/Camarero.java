@@ -1,6 +1,7 @@
 package windows.camarero;
 
 import windows.administrator.Empleado;
+import windows.administrator.Productos;
 
 import javax.swing.*;
 import java.awt.*;
