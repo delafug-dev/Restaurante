@@ -1,7 +1,4 @@
-package Windows.Administrador;
-
-import Windows.Window;
-import Windows.camarero.Camarero;
+package windows.administrator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,12 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import static windows.Window.pantalla;
 
-public class Window_administrador extends JFrame {
-    private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+
+public class Window_Administrator extends JFrame {
+
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
-    public Window_administrador(){
+    public Window_Administrator(){
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
@@ -91,7 +90,6 @@ public class Window_administrador extends JFrame {
                 }
             });
             // boton.addActionListener(new AccionAbrirMenuCocinero());
-            boton.addActionListener(new Window_administrador.accionEmpleado());
             return boton;
         }
 
@@ -110,8 +108,12 @@ public class Window_administrador extends JFrame {
                 System.out.println("Se ha pulsado el botón cocinero");
             }
         });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+
+        boton.addActionListener(new Window_Administrator.accionmesas());
         return boton;
     }
+
 
     private static JButton crearBotonProducto() {
 
@@ -123,19 +125,20 @@ public class Window_administrador extends JFrame {
         boton.setIcon(imagenProducto);
 
         boton.setFocusPainted(false);
-        boton.addActionListener(new Window_administrador.accionProductos());
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cocinero");
+            }
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
+    static class accionmesas implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new windows.administrator.Mesas();
+    }
+}
 
-    public static class accionProductos implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            new Productos();
-        }
-    }
-    public static class accionEmpleado implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            new Empleado();
-        }
-    }
+
 
 }
