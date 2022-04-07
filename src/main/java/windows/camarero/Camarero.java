@@ -1,7 +1,6 @@
-package Windows.camarero;
+package windows.camarero;
 
-import Windows.Administrador.Empleado;
-import Windows.Administrador.Productos;
+import windows.administrator.Empleado;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +90,7 @@ import java.io.File;
                 }
             });
             // boton.addActionListener(new AccionAbrirMenuCocinero());
-            boton.addActionListener(new Windows.Administrador.Window_administrador.accionEmpleado());
+            boton.addActionListener(new accionEmpleado());
             return boton;
         }
 
@@ -123,7 +122,7 @@ import java.io.File;
             boton.setIcon(imagenProducto);
 
             boton.setFocusPainted(false);
-            boton.addActionListener(new Windows.Administrador.Window_administrador.accionProductos());
+            boton.addActionListener(new accionProductos());
             return boton;
         }
 

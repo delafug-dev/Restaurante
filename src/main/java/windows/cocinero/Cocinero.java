@@ -1,4 +1,4 @@
-package Windows.Cocinero;
+package windows.cocinero;
 
 
 import javax.swing.*;
