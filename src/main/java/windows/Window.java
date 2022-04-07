@@ -1,7 +1,7 @@
 package windows;
 
-import windows.administrator.Window_Administrator;
 import windows.cocinero.Window_Cocinero;
+import windows.administrator.Window_Administrator;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

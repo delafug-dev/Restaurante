@@ -135,7 +135,7 @@ public class Window_Administrator extends JFrame {
     }
     static class accionmesas implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            new Mesas();
+            new windows.administrator.Mesas();
     }
 }
 
