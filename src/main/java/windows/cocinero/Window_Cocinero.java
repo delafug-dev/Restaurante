@@ -2,6 +2,8 @@ package windows.cocinero;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import static windows.Window.pantalla;
 
@@ -36,6 +38,14 @@ public class Window_Cocinero extends JFrame{
         setContentPane(panelPrincipal);
         setSize(pantalla);
         setVisible(true);
+
+        comandasButton.addActionListener(new accion_comanda());
+    }
+// ACCION PARA NAVEGAR DE UN PANEL A OTRO
+    static class accion_comanda implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Window_Comanda();
+        } // aquí va a la clase / panel al que quiero accerder
     }
 
     private static ImageIcon rutaDeImagen(){
