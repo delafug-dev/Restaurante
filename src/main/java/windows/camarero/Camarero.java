@@ -9,123 +9,127 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import static windows.Window.pantalla;
 
-    public class Camarero  extends JFrame {
-        private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
-        private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
-        public Camarero(){
+public class Camarero  extends JFrame {
 
-            JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
+    private static final ImageIcon imagenFondo = rutaDeImagen();
 
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
-            window.setSize(pantalla); // indica tamaño de la ventana
+    public Camarero() {
 
-            JPanel panel = pane();
-            JPanel panel2 = pane2();
-            JPanel panel12 = pane3();
-            JPanel fondo = crearPanelImagenFondo();
+        JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-            JButton boton_empleado, boton_productos, boton_mesas;
-            boton_empleado = crearBotonEmpleado();
-            boton_productos = crearBotonProducto();
-            boton_mesas = crearBotonMesa();
-            panel.add(boton_empleado);
-            panel2.add(boton_productos);
-            panel12.add(boton_mesas);
-            window.add(panel);
-            window.add(panel2);
-            window.add(panel12);
-            window.add(fondo);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
+        window.setSize(pantalla); // indica tamaño de la ventana
 
-            window.setVisible(true);
-        }
-        private static String rutaDeImagen(){
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\administrador.jpg";
-            return ruta;
-        }
-        private static JPanel crearPanelImagenFondo(){
-            JPanel panel = new JPanel(new BorderLayout()){
-                public void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    g.drawImage(imagenFondo.getImage(), 0, 0, null);
-                }
-            };
-            return panel;
-        }
+        JPanel panel = pane();
+        JPanel panel2 = pane2();
+        JPanel panel12 = pane3();
+        JPanel fondo = crearPanelImagenFondo();
 
-        private static JPanel pane (){
-            JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(450, 320, 400, 100);
-            return panel;
-        }
+        JButton boton_empleado, boton_productos, boton_mesas;
+        boton_empleado = crearBotonAforo();
+        boton_productos = crearBotonPedidos();
+        boton_mesas = crearBotonCuenta();
+        panel.add(boton_empleado);
+        panel2.add(boton_productos);
+        panel12.add(boton_mesas);
+        window.add(panel);
+        window.add(panel2);
+        window.add(panel12);
+        window.add(fondo);
 
-        private static JPanel pane2 (){
-            JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(450, 200, 400, 100);
-            return panel;
-        }
+        window.setVisible(true);
+    }
 
-        private static JPanel pane3 (){
-            JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(1, 0));
-            panel.setBounds(450, 440, 400, 100);
-            return panel;
-        }
+    private static ImageIcon rutaDeImagen() {
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\camarerofondo.jpg";
+        ImageIcon imagenMesa = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenMesa.getImage()
+                .getScaledInstance(1400, pantalla.height, Image.SCALE_SMOOTH);
+        imagenMesa.setImage(cambiar_tamayo);
+        return imagenMesa;
+    }
 
-        private static JButton crearBotonEmpleado() {
+    private static JPanel crearPanelImagenFondo() {
+        JPanel panel = new JPanel(new BorderLayout()) {
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagenFondo.getImage(), 0, 0, null);
+            }
+        };
+        return panel;
+    }
 
-            JButton boton = new JButton("Empleado");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\empleado.png";
-            ImageIcon imagenEmpleado = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenEmpleado.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            imagenEmpleado.setImage(cambiar_tamayo);
-            boton.setIcon(imagenEmpleado);
+    private static JPanel pane() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 320, 400, 100);
+        return panel;
+    }
 
-            boton.setFocusPainted(false);
-            boton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("Se ha pulsado el botón cocinero");
-                }
-            });
-            // boton.addActionListener(new AccionAbrirMenuCocinero());
-            boton.addActionListener(new accionEmpleado());
-            return boton;
-        }
+    private static JPanel pane2() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 200, 400, 100);
+        return panel;
+    }
 
-        private static JButton crearBotonMesa() {
+    private static JPanel pane3() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 440, 400, 100);
+        return panel;
+    }
 
-            JButton boton = new JButton("Mesas");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\mesa.png";
-            ImageIcon imagenMesa = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenMesa.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            imagenMesa.setImage(cambiar_tamayo);
-            boton.setIcon(imagenMesa);
+    private static JButton crearBotonAforo() {
 
-            boton.setFocusPainted(false);
-            boton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("Se ha pulsado el botón cocinero");
-                }
-            });
-            return boton;
-        }
+        JButton boton = new JButton("Aforo");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\aforo.png";
+        ImageIcon imagenEmpleado = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenEmpleado.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenEmpleado.setImage(cambiar_tamayo);
+        boton.setIcon(imagenEmpleado);
 
-        private static JButton crearBotonProducto() {
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha pulsado el botón cocinero");
+            }
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new accionEmpleado());
+        return boton;
+    }
 
-            JButton boton = new JButton("Productos");
-            String ruta = new File("").getAbsolutePath() + "\\imagenes\\producto.png";
-            ImageIcon imagenProducto = new ImageIcon(ruta);
-            Image cambiar_tamayo = imagenProducto.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-            imagenProducto.setImage(cambiar_tamayo);
-            boton.setIcon(imagenProducto);
+    private static JButton crearBotonPedidos() {
 
-            boton.setFocusPainted(false);
-            boton.addActionListener(new accionProductos());
-            return boton;
-        }
+        JButton boton = new JButton("Pedidos");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\pedido.png";
+        ImageIcon imagenMesa = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenMesa.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenMesa.setImage(cambiar_tamayo);
+        boton.setIcon(imagenMesa);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new accionEmpleado.accionPedido());
+        return boton;
+    }
+
+    private static JButton crearBotonCuenta() {
+
+        JButton boton = new JButton("Cuenta");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\factura.png";
+        ImageIcon imagenProducto = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenProducto.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenProducto.setImage(cambiar_tamayo);
+        boton.setIcon(imagenProducto);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new accionProductos());
+        return boton;
+    }
 
         static class accionProductos implements ActionListener {
             public void actionPerformed(ActionEvent ae) {
@@ -136,6 +140,12 @@ import java.io.File;
             public void actionPerformed(ActionEvent ae) {
                 new Empleado();
             }
-        }
+static class accionPedido implements ActionListener {
+            public void actionPerformed(ActionEvent ae) {
+                new Pedido();
+            }
 
+        }
     }
+}
+

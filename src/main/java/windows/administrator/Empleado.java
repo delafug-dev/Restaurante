@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+import static windows.Window.pantalla;
+
 
 public class Empleado extends JFrame{
-        private static Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
         private static final ImageIcon imagenFondo = rutaDeImagen();
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
