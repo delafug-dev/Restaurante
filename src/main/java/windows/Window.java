@@ -1,5 +1,6 @@
 package windows;
 
+import windows.camarero.Camarero;
 import windows.cocinero.Window_Cocinero;
 import windows.administrator.Window_Administrator;
 
@@ -118,9 +119,15 @@ public class Window extends JFrame {
                 System.out.println("Se ha pulsado el botón camarero");
             }
         });
-        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new accion_camarero());
         return boton;
     }
+    static class accion_camarero implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Camarero();
+        }
+    }
+
 
     private static JButton crearBotonAdministrador() {
         Font fuente = new Font("Arial", Font.ITALIC, 30);
