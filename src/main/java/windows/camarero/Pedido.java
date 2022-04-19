@@ -104,7 +104,7 @@ public class Pedido extends JFrame{
     private static JPanel pane2() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0, 5,5));
-        panel.setBounds(500, 350, 600, 100);
+        panel.setBounds(50, 400, 600, 100);
         return panel;
     }
     private void rellenarComboMesas(JComboBox comboBox){

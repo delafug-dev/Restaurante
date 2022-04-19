@@ -9,10 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import static windows.Window.pantalla;
-
 
 public class Camarero  extends JFrame {
+
+
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
 
     private static final ImageIcon imagenFondo = rutaDeImagen();
 
@@ -99,7 +100,7 @@ public class Camarero  extends JFrame {
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
-        boton.addActionListener(new accionEmpleado());
+        boton.addActionListener(new accionAforo());
         return boton;
     }
 
@@ -113,7 +114,7 @@ public class Camarero  extends JFrame {
         boton.setIcon(imagenMesa);
 
         boton.setFocusPainted(false);
-        boton.addActionListener(new accionEmpleado.accionPedido());
+        boton.addActionListener(new accionAforo.accionPedido());
         return boton;
     }
 
@@ -137,10 +138,10 @@ public class Camarero  extends JFrame {
         }
     }
 
-    static class accionEmpleado implements ActionListener {
+    static class accionAforo implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
 
-            new Empleado();
+            new Aforo();
         }
 
         static class accionPedido implements ActionListener {
