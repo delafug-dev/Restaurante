@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import static windows.Window.pantalla;
-
 public class Window_Administrator extends JFrame {
+
+
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
 
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 

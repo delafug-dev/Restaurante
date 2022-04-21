@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import static windows.Window.pantalla;
-
 public class Productos extends JFrame{
+
+
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
     JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
     static Font fuente=new Font("Arial", Font.ITALIC, 30);
@@ -170,6 +171,6 @@ public class Productos extends JFrame{
             String ruta = new File("").getAbsolutePath() + "\\imagenes\\producto.jpg";
             return ruta;
         }
-    }
+}
 
 

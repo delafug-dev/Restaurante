@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-import static windows.Window.pantalla;
-
 
 public class Empleado extends JFrame{
+
+
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
         private static final ImageIcon imagenFondo = rutaDeImagen();
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
@@ -15,7 +16,7 @@ public class Empleado extends JFrame{
         public Empleado() {
 
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
-            window.setSize(pantalla); // indica tamaño de la ventana
+             // indica tamaño de la ventana
 
             JPanel panel = panel1();
             panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
@@ -62,7 +63,7 @@ public class Empleado extends JFrame{
             panel2.add(boton_modificar);
             panel2.add(boton_eliminar);
 
-
+            window.setSize(pantalla);
             window.add(panel);
             window.add(panel2);
             window.add(fondo);

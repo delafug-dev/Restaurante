@@ -9,10 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import static windows.Window.pantalla;
-
 
 public class Camarero  extends JFrame {
+
+
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
 
     private static final ImageIcon imagenFondo = rutaDeImagen();
 
@@ -99,7 +100,7 @@ public class Camarero  extends JFrame {
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
-        boton.addActionListener(new accionEmpleado());
+        boton.addActionListener(new accionAforo());
         return boton;
     }
 
@@ -113,7 +114,7 @@ public class Camarero  extends JFrame {
         boton.setIcon(imagenMesa);
 
         boton.setFocusPainted(false);
-        boton.addActionListener(new accionEmpleado.accionPedido());
+        boton.addActionListener(new accionAforo.accionPedido());
         return boton;
     }
 
@@ -127,32 +128,28 @@ public class Camarero  extends JFrame {
         boton.setIcon(imagenProducto);
 
         boton.setFocusPainted(false);
-        boton.addActionListener(new accionEmpleado.accionCuenta());
+        boton.addActionListener(new accionProductos());
         return boton;
     }
 
-        static class accionProductos implements ActionListener {
-            public void actionPerformed(ActionEvent ae) {
-                new Productos();
-            }
+    static class accionProductos implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Productos();
         }
-        static class accionEmpleado implements ActionListener {
-            public void actionPerformed(ActionEvent ae) {
-                new Empleado();
-            }
-static class accionPedido implements ActionListener {
+    }
+
+    static class accionAforo implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+
+            new Aforo();
+        }
+
+        static class accionPedido implements ActionListener {
             public void actionPerformed(ActionEvent ae) {
                 new Pedido();
             }
 
         }
-
-            static class accionCuenta implements ActionListener {
-                public void actionPerformed(ActionEvent ae) {
-                    new Cuenta();
-                }
-
-            }
     }
 }
 
