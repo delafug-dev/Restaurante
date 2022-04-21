@@ -128,13 +128,13 @@ public class Camarero  extends JFrame {
         boton.setIcon(imagenProducto);
 
         boton.setFocusPainted(false);
-        boton.addActionListener(new accionProductos());
+        boton.addActionListener(new accionCuenta());
         return boton;
     }
 
-    static class accionProductos implements ActionListener {
+    static class accionCuenta implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            new Productos();
+            new Cuenta();
         }
     }
 

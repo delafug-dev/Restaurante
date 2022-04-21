@@ -35,7 +35,6 @@ public class Cuenta extends JFrame{
         panelPrincipal.add(panelFondo);
 
         // CONFIGURACION WINDOW_COMANDA
-        setLocationRelativeTo(null);
         setResizable(false);
         setContentPane(panelPrincipal);
         setSize(pantalla);

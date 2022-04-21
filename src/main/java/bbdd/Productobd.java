@@ -1,4 +1,4 @@
-package bbdd;
+/**package bbdd;
 import modelos.Tipoproducto;
 import modelos.Producto;
 
@@ -158,3 +158,4 @@ public class Productobd extends Configuracion{
 
     }
 }
+ **/

@@ -7,17 +7,20 @@ public class Producto {
     private String descripcion;
     private int tipo;
     private Tipoproducto tipoproducto;
+    private TipoTamañoProducto tipo_tamanyo_producto;
 
-    public Producto(int id, String descripcion, int tipo, Tipoproducto tipoproducto) {
+    public Producto(int id, String descripcion, int tipo, Tipoproducto tipoproducto, TipoTamañoProducto tipo_tamanyo_producto) {
         this.id = id;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.tipoproducto = tipoproducto;
+        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
     }
-    public Producto( String descripcion, int tipo, Tipoproducto tipoproducto) {
+    public Producto( String descripcion, int tipo, Tipoproducto tipoproducto, TipoTamañoProducto tipo_tamanyo_producto) {
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.tipoproducto = tipoproducto;
+        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
     }
 
     public Producto() {
@@ -55,17 +58,25 @@ public class Producto {
         this.tipoproducto = tipoproducto;
     }
 
+    public TipoTamañoProducto getTipo_tamanyo_producto() {
+        return tipo_tamanyo_producto;
+    }
+
+    public void setTipo_tamanyo_producto(TipoTamañoProducto tipo_tamanyo_producto) {
+        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return id == producto.id && tipo == producto.tipo && Objects.equals(descripcion, producto.descripcion) && tipoproducto == producto.tipoproducto;
+        return id == producto.id && tipo == producto.tipo && Objects.equals(descripcion, producto.descripcion) && tipoproducto == producto.tipoproducto && Objects.equals(tipo_tamanyo_producto, producto.tipo_tamanyo_producto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, descripcion, tipo, tipoproducto);
+        return Objects.hash(id, descripcion, tipo, tipoproducto, tipo_tamanyo_producto);
     }
 
     @Override
@@ -75,6 +86,7 @@ public class Producto {
                 ", descripcion='" + descripcion + '\'' +
                 ", tipo=" + tipo +
                 ", tipoproducto=" + tipoproducto +
+                ", tipo_tamanyo_producto=" + tipo_tamanyo_producto +
                 '}';
     }
 }
