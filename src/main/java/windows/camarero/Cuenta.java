@@ -15,7 +15,8 @@ public class Cuenta extends JFrame{
         // JPANELS
         JPanel panelCuenta = new JPanel();
         panelCuenta.setLayout(new GridLayout(1,0));
-        panelCuenta.setBounds(350,160,500,50);
+        panelCuenta.setBounds(275,160,700,220);
+
 
         //TABLA COMANDA
         Object[] columnas = {"Número Mesa",
@@ -27,10 +28,14 @@ public class Cuenta extends JFrame{
         JScrollPane scrollPane = new JScrollPane(tablaCuenta);
         tablaCuenta.setFillsViewportHeight(true);
 
+        JPanel panelFondo = crearPanelImagenFondo();
+
         panelCuenta.add(scrollPane);
         panelPrincipal.add(panelCuenta);
+        panelPrincipal.add(panelFondo);
 
         // CONFIGURACION WINDOW_COMANDA
+        setLocationRelativeTo(null);
         setResizable(false);
         setContentPane(panelPrincipal);
         setSize(pantalla);
