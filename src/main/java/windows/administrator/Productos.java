@@ -43,9 +43,17 @@ public class Productos extends JFrame{
         JTextField descripcion = new JTextField();
         etiquetadescripcion.setLabelFor(descripcion);
 
-        JLabel etiquetaprecio = precio();
-        JTextField precio = new JTextField();
-        etiquetaprecio.setLabelFor(precio);
+        JLabel etiquetaprecio = precioTapa();
+        JTextField preciotapa = new JTextField();
+        etiquetaprecio.setLabelFor(preciotapa);
+
+        JLabel etiquetapreciomedia = precioMedia();
+        JTextField preciomedia = new JTextField();
+        etiquetaprecio.setLabelFor(preciomedia);
+
+        JLabel etiquetaentera = precioRacion();
+        JTextField precioentera = new JTextField();
+        etiquetaprecio.setLabelFor(precioentera);
 
         panel.add(etiquetaid);
         panel.add(id);
@@ -54,7 +62,11 @@ public class Productos extends JFrame{
         panel.add(etiquetadescripcion);
         panel.add(descripcion);
         panel.add(etiquetaprecio);
-        panel.add(precio);
+        panel.add(preciotapa);
+        panel.add(etiquetapreciomedia);
+        panel.add(preciomedia);
+        panel.add(etiquetaentera);
+        panel.add(precioentera);
 
 
        //Añado archivos en Panel de los botones.
@@ -75,40 +87,58 @@ public class Productos extends JFrame{
         panel.setBounds(270, 100, 700, 500);
         return panel;
     }
+
     private static JPanel panel2 (){
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4, 5 ,5 ));
         panel.setBounds(320, 600, 600, 70);
         return panel;
     }
+
     public static JLabel id(){
         JLabel id = new JLabel();
         id.setFont(fuente);
         id.setText("Id");
         return id;
     }
+
     public static JLabel codigo(){
         JLabel codigo = new JLabel();
         codigo.setFont(fuente);
-        codigo.setText("Código");
+        codigo.setText("Descripción");
         return codigo;
     }
+
     public static JLabel descripcion(){
         JLabel descripcion = new JLabel();
         descripcion.setFont(fuente);
-        descripcion.setText("Descripción");
+        descripcion.setText("Tipo de Producto");
         return descripcion;
     }
 
-    public static JLabel precio(){
+    public static JLabel precioTapa(){
         JLabel precio = new JLabel();
         precio.setFont(fuente);
-        precio.setText("Precio");
+        precio.setText("Precio Tapa");
+        return precio;
+    }
+
+    public static JLabel precioMedia(){
+        JLabel precio = new JLabel();
+        precio.setFont(fuente);
+        precio.setText("Precio 1/2");
+        return precio;
+    }
+
+    public static JLabel precioRacion(){
+        JLabel precio = new JLabel();
+        precio.setFont(fuente);
+        precio.setText("Precio ración");
         return precio;
     }
 
 
-        private static JButton boton_crear() {
+    private static JButton boton_crear() {
 
             JButton boton = new JButton("Crear");
             boton.setFocusPainted(false);
