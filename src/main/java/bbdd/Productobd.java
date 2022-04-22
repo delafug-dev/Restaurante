@@ -1,4 +1,5 @@
-/**package bbdd;
+package bbdd;
+import modelos.TipoTamañoProducto;
 import modelos.Tipoproducto;
 import modelos.Producto;
 
@@ -11,7 +12,6 @@ import java.util.List;
 
 public class Productobd extends Configuracion{
 
-    public class ProductoBD extends UtilidadesBD {
 
         public static Producto obtenerPorId(Integer id) {
 
@@ -157,5 +157,4 @@ public class Productobd extends Configuracion{
 
 
     }
-}
- **/
+

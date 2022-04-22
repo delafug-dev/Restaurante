@@ -8,11 +8,11 @@ public class TipoTamañoProducto {
     private double media;
     private double grande;
 
-    public TipoTamañoProducto(int id, double pequenya, double media, double grande) {
+    public TipoTamañoProducto(double pequenya, double media, double grande) {
         this.id = id;
         this.pequenya = pequenya;
-        this.media = media;
-        this.grande = grande;
+        this.media = this.media;
+        this.grande = this.grande;
     }
 
     public int getId() {

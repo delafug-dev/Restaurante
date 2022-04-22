@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 public class Configuracion {
 
 
-    public class UtilidadesBD {
-
         private static final String url = "jdbc:mariadb://localhost:3306/restaurante";
         private static final String usuario = "root";
         private static final String password = "77046754";
@@ -37,4 +35,4 @@ public class Configuracion {
         }
 
     }
-}
+

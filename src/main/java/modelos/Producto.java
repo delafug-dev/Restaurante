@@ -9,18 +9,16 @@ public class Producto {
     private Tipoproducto tipoproducto;
     private TipoTamañoProducto tipo_tamanyo_producto;
 
-    public Producto(int id, String descripcion, int tipo, Tipoproducto tipoproducto, TipoTamañoProducto tipo_tamanyo_producto) {
+    public Producto(int id, String descripcion, int tipo, Tipoproducto tipoproducto) {
         this.id = id;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.tipoproducto = tipoproducto;
-        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
     }
-    public Producto( String descripcion, int tipo, Tipoproducto tipoproducto, TipoTamañoProducto tipo_tamanyo_producto) {
+    public Producto( String descripcion, int tipo, Tipoproducto tipoproducto) {
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.tipoproducto = tipoproducto;
-        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
     }
 
     public Producto() {

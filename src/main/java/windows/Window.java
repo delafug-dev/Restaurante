@@ -1,6 +1,8 @@
 package windows;
 
 import windows.camarero.Camarero;
+import windows.camarero.Cuenta;
+import windows.cliente.Cliente;
 import windows.cocinero.Window_Cocinero;
 import windows.administrator.Window_Administrator;
 
@@ -97,8 +99,13 @@ public class Window extends JFrame {
                 System.out.println("Se ha pulsado el botón cliente");
             }
         });
-        //boton.addActionListener(new AccionAbrirMenuCocinero());
+        boton.addActionListener(new accionAbrirCarta());
         return boton;
+    }
+    static class accionAbrirCarta implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Cliente();
+        }
     }
 
     private static JButton crearBotonCamarero() {
