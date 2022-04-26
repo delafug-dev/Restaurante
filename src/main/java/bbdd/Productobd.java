@@ -24,8 +24,7 @@ public class Productobd extends Configuracion{
 
                 //Recorremos los datos
                 while (rs.next()) {
-                    producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
-                            rs.getInt("tamaño"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                    producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),Tipoproducto.values()[rs.getInt("tipo_producto")],
                             rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 
@@ -51,8 +50,7 @@ public class Productobd extends Configuracion{
 
                 //Recorremos los datos
                 while (rs.next()) {
-                    Producto producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
-                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                    Producto producto = new Producto(rs.getInt("id"), rs.getString("descripcion"), Tipoproducto.values()[rs.getInt("tipo_producto")],
                             rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 

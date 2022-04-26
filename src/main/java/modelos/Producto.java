@@ -11,18 +11,16 @@ public class Producto {
     private double media;
     private double grande;
 
-    public Producto(int id, String descripcion, int tamayo, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
+    public Producto(int id, String descripcion, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
         this.id = id;
         this.descripcion = descripcion;
-        this.tamayo = tamayo;
         this.tipoproducto = tipoproducto;
         this.pequenya = pequenya;
         this.media = media;
         this.grande = grande;
     }
-    public Producto(String descripcion, int tamayo, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
+    public Producto(String descripcion, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
         this.descripcion = descripcion;
-        this.tamayo = tamayo;
         this.tipoproducto = tipoproducto;
         this.pequenya = pequenya;
         this.media = media;

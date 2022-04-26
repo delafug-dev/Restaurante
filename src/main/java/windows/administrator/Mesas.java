@@ -1,8 +1,16 @@
 package windows.administrator;
 
+import bbdd.MesasBD;
+import bbdd.Productobd;
+import modelos.Mesa;
+import modelos.Producto;
+import modelos.Tipoproducto;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import static windows.Window.pantalla;
@@ -13,6 +21,9 @@ public class Mesas extends JFrame {
     private static final Font fuente = new Font("Arial", Font.ITALIC | Font.BOLD, 45);
 
     JPanel panelPrincipal = crearPanelImagenFondo();
+    private static JTextField fieldId;
+    private static JTextField fieldNumMesa;
+    private static JTextField fieldNumComensales;
 
     public Mesas(){
         JPanel panelSuperior = new JPanel(new BorderLayout());
@@ -21,9 +32,27 @@ public class Mesas extends JFrame {
 
         // BOTONES
         JButton crear = new JButton("CREAR");
+        crear.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Mesa mesa = new Mesa();
+                mesa.setId(Integer.parseInt(fieldId.getText()));
+                mesa.setNum_mesa(Integer.parseInt(fieldNumMesa.getText()));
+                mesa.setNum_comensales(Integer.parseInt(fieldNumComensales.getText()));
+                MesasBD.crearActualizarProducto(mesa);
+            }
+
+        });
+
         JButton buscar = new JButton("BUSCAR");
         JButton modificar = new JButton("MODIFICAR");
         JButton eliminar = new JButton("ELIMINAR");
+        eliminar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Mesa mesa = new Mesa();
+                mesa.setId(Integer.parseInt(fieldId.getText()));
+                MesasBD.eliminarProducto(mesa);
+            }
+        });
 
         botones.add(crear);
         botones.add(buscar);
@@ -35,15 +64,15 @@ public class Mesas extends JFrame {
         formulario.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
 
         JLabel etiquetaId = id();
-        JTextField fieldId = new JTextField();
+        fieldId = new JTextField();
         etiquetaId.setLabelFor(fieldId);
 
         JLabel etiquetaNumMesa = num_mesa();
-        JTextField fieldNumMesa = new JTextField();
+        fieldNumMesa = new JTextField();
         etiquetaNumMesa.setLabelFor(fieldNumMesa);
 
         JLabel etiquetaNumComensales = num_comensales();
-        JTextField fieldNumComensales = new JTextField();
+        fieldNumComensales = new JTextField();
         etiquetaNumComensales.setLabelFor(fieldNumComensales);
 
         formulario.add(id());
@@ -111,7 +140,7 @@ public class Mesas extends JFrame {
     public static JLabel num_comensales(){
         JLabel num_comensales = new JLabel();
         num_comensales.setFont(fuente);
-        num_comensales.setText("DESCRIPCIÓN");
+        num_comensales.setText("Nº Comensales");
 
         num_comensales.setForeground(Color.WHITE);
         return num_comensales;
