@@ -5,26 +5,58 @@ import java.util.Objects;
 public class Producto {
     private int id;
     private String descripcion;
-    private int tipo;
+    private int tamayo;
     private Tipoproducto tipoproducto;
-    private TipoTamañoProducto tipo_tamanyo_producto;
+    private double pequenya;
+    private double media;
+    private double grande;
 
-    public Producto(int id, String descripcion, int tipo, Tipoproducto tipoproducto) {
+    public Producto(int id, String descripcion, int tamayo, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
         this.id = id;
         this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.tamayo = tamayo;
         this.tipoproducto = tipoproducto;
+        this.pequenya = pequenya;
+        this.media = media;
+        this.grande = grande;
     }
-    public Producto( String descripcion, int tipo, Tipoproducto tipoproducto) {
+    public Producto(String descripcion, int tamayo, Tipoproducto tipoproducto, double pequenya, double media, double grande) {
         this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.tamayo = tamayo;
         this.tipoproducto = tipoproducto;
+        this.pequenya = pequenya;
+        this.media = media;
+        this.grande = grande;
     }
 
-    public Producto() {
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", tamayo=" + tamayo +
+                ", tipoproducto=" + tipoproducto +
+                ", pequenya=" + pequenya +
+                ", media=" + media +
+                ", grande=" + grande +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id && tamayo == producto.tamayo && Double.compare(producto.pequenya, pequenya) == 0 && Double.compare(producto.media, media) == 0 && Double.compare(producto.grande, grande) == 0 && Objects.equals(descripcion, producto.descripcion) && tipoproducto == producto.tipoproducto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, descripcion, tamayo, tipoproducto, pequenya, media, grande);
     }
 
     public int getId() {
+        
         return id;
     }
 
@@ -40,12 +72,12 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getTipo() {
-        return tipo;
+    public int getTamayo() {
+        return tamayo;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setTamayo(int tamayo) {
+        this.tamayo = tamayo;
     }
 
     public Tipoproducto getTipoproducto() {
@@ -56,35 +88,31 @@ public class Producto {
         this.tipoproducto = tipoproducto;
     }
 
-    public TipoTamañoProducto getTipo_tamanyo_producto() {
-        return tipo_tamanyo_producto;
+    public double getPequenya() {
+        return pequenya;
     }
 
-    public void setTipo_tamanyo_producto(TipoTamañoProducto tipo_tamanyo_producto) {
-        this.tipo_tamanyo_producto = tipo_tamanyo_producto;
+    public void setPequenya(double pequenya) {
+        this.pequenya = pequenya;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Producto producto = (Producto) o;
-        return id == producto.id && tipo == producto.tipo && Objects.equals(descripcion, producto.descripcion) && tipoproducto == producto.tipoproducto && Objects.equals(tipo_tamanyo_producto, producto.tipo_tamanyo_producto);
+    public double getMedia() {
+        return media;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, descripcion, tipo, tipoproducto, tipo_tamanyo_producto);
+    public void setMedia(double media) {
+        this.media = media;
     }
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                ", tipo=" + tipo +
-                ", tipoproducto=" + tipoproducto +
-                ", tipo_tamanyo_producto=" + tipo_tamanyo_producto +
-                '}';
+    public double getGrande() {
+        return grande;
     }
+
+    public void setGrande(double grande) {
+        this.grande = grande;
+    }
+
+    public Producto() {
+    }
+
 }

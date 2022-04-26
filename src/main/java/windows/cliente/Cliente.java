@@ -2,14 +2,11 @@ package windows.cliente;
 
 import bbdd.Productobd;
 import modelos.Producto;
-import modelos.TipoTamañoProducto;
-import modelos.Tipoproducto;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static windows.Window.pantalla;
 
