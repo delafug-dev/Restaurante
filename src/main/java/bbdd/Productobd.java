@@ -1,5 +1,4 @@
 package bbdd;
-import modelos.TipoTamañoProducto;
 import modelos.Tipoproducto;
 import modelos.Producto;
 
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Productobd extends Configuracion{
+
 
         public static Producto obtenerPorId(Integer id) {
 
@@ -25,9 +25,8 @@ public class Productobd extends Configuracion{
                 //Recorremos los datos
                 while (rs.next()) {
                     producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
-                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")]);
-
-
+                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                            rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 
             } catch (SQLException sqle) {
@@ -47,15 +46,14 @@ public class Productobd extends Configuracion{
             List<Producto> productos = new ArrayList<>();
 
             try {
-                PreparedStatement query = con.prepareStatement("SELECT descripcion, tipo_producto, precio FROM producto ");
+                PreparedStatement query = con.prepareStatement("SELECT descripcion, tamaño, tipo_producto FROM producto ");
                 ResultSet rs = query.executeQuery();
 
                 //Recorremos los datos
                 while (rs.next()) {
-                    Producto producto = new Producto( rs.getString("descripcion"),
-                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")]);
-                    productos.add(producto);
-
+                    Producto producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
+                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                            rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 
             } catch (SQLException sqle) {
@@ -86,12 +84,12 @@ public class Productobd extends Configuracion{
             Connection con = conectarConBD();
 
             try {
-                PreparedStatement insert = con.prepareStatement("insert into producto (id, descripcion,precio,tipo_producto)" +
+                PreparedStatement insert = con.prepareStatement("insert into producto (id, descripcion,tamaño ,tipo_producto)" +
                         "values(?,?,?,?)");
 
                 insert.setInt(1, producto.getId());
                 insert.setString(2,producto.getDescripcion());
-                insert.setDouble(3,producto.getTipo());
+                insert.setInt(3, producto.getTamayo());
                 insert.setInt(4, producto.getTipoproducto().ordinal());
 
                 //Ejecución del insert
@@ -113,11 +111,11 @@ public class Productobd extends Configuracion{
 
             try {
                 PreparedStatement update = con.prepareStatement("update producto " +
-                        "set descripcion = ? , precio = ? , tipo_producto = ?" +
+                        "set descripcion = ? , tamaño = ?, tipo_producto = ?" +
                         "where id = ? ");
 
                 update.setString(1,producto.getDescripcion());
-                update.setDouble(2,producto.getTipo());
+                update.setInt(2, producto.getTamayo());
                 update.setInt(3, producto.getTipoproducto().ordinal());
                 update.setInt(4, producto.getId());
 
@@ -158,6 +156,5 @@ public class Productobd extends Configuracion{
         }
 
 
-
-}
+    }
 
