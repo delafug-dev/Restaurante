@@ -20,7 +20,7 @@ public class Pedido extends JFrame{
 
             JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
+            // window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
             window.setSize(pantalla); // indica tamaño de la ventana
 
             JPanel panel = pane();

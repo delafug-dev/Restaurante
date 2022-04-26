@@ -1,22 +1,36 @@
 package windows.administrator;
 
+import bbdd.EmpleadoBD;
+import bbdd.Productobd;
+import modelos.ModeloEmpleado;
+import modelos.Producto;
+import modelos.Tipoproducto;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 
+
 public class Empleado extends JFrame{
-
-
-    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
         private static final ImageIcon imagenFondo = rutaDeImagen();
-        JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
+        public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+    JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
+
+        private static JTextField id;
+        private static JTextField codigo_empleado;
+        private static JTextField nombre;
+        private static JTextField apellidos;
 
         public Empleado() {
 
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
              // indica tamaño de la ventana
+
+            window.setSize(pantalla); // indica tamaño de la ventana
 
             JPanel panel = panel1();
             panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
@@ -32,25 +46,25 @@ public class Empleado extends JFrame{
             boton_eliminar = boton_eliminar();
             boton_buscar = boton_buscar();
             JLabel etiquetaid = id();
-            JTextField id = new JTextField();
+            id = new JTextField();
             etiquetaid.setLabelFor(id);
 
             JLabel etiquetacodigo = codigo();
-            JTextField codigo = new JTextField();
-            etiquetacodigo.setLabelFor(codigo);
+            codigo_empleado = new JTextField();
+            etiquetacodigo.setLabelFor(codigo_empleado);
 
             JLabel etiquetasapellidos = apellidos();
-            JTextField apellidos = new JTextField();
+            apellidos = new JTextField();
             etiquetasapellidos.setLabelFor(apellidos);
 
             JLabel etiquetanombre = nombre();
-            JTextField nombre = new JTextField();
+            nombre = new JTextField();
             etiquetanombre.setLabelFor(nombre);
 
             panel.add(etiquetaid);
             panel.add(id);
             panel.add(etiquetacodigo);
-            panel.add(codigo);
+            panel.add(codigo_empleado);
             panel.add(etiquetanombre);
             panel.add(nombre);
             panel.add(etiquetasapellidos);
@@ -63,7 +77,7 @@ public class Empleado extends JFrame{
             panel2.add(boton_modificar);
             panel2.add(boton_eliminar);
 
-            window.setSize(pantalla);
+
             window.add(panel);
             window.add(panel2);
             window.add(fondo);
@@ -113,28 +127,54 @@ public class Empleado extends JFrame{
 
 
         private static JButton boton_crear() {
-
             JButton boton = new JButton("Crear");
             boton.setFocusPainted(false);
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    ModeloEmpleado empleado = new ModeloEmpleado();
+                    empleado.setId(Integer.parseInt(id.getText()));
+                    empleado.setCodigoEmpleado(codigo_empleado.getText());
+                    empleado.setNombre(nombre.getText());
+                    empleado.setApellidos(apellidos.getText());
+                    EmpleadoBD.crearActualizarEmpleado(empleado);
+                }
+
+            });
+            // boton.addActionListener(new AccionAbrirMenuCocinero());
+            return boton;
+            }
+        private static JButton boton_buscar() {
+            JButton boton = new JButton("Buscar");
+            boton.setFocusPainted(false);
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Integer empleado = Integer.valueOf(id.getText());
+                    Productobd.obtenerPorId(empleado);
+                }
+            });
             // boton.addActionListener(new AccionAbrirMenuCocinero());
             return boton;
         }
-        private static JButton boton_buscar() {
-
-            JButton boton = new JButton("Buscar");
-            boton.setFocusPainted(false);
-            return boton;
-        }
         private static JButton boton_eliminar() {
-
-            JButton boton = new JButton("Eliminar");
-            boton.setFocusPainted(false);
-            return boton;
+            JButton eliminar  = new JButton("Eliminar");
+            eliminar.addActionListener(new ActionListener( ) {
+                public void actionPerformed(ActionEvent e) {
+                    ModeloEmpleado empleado = new ModeloEmpleado();
+                    empleado.setId(Integer.parseInt(id.getText()));
+                    EmpleadoBD.eliminarEmpleado(empleado);
+                }
+            });
+            return eliminar;
         }
         private static JButton boton_modificar() {
-
             JButton boton = new JButton("Modificar");
             boton.setFocusPainted(false);
+            boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Se ha pulsado el botón cocinero");
+                }
+            });
+            // boton.addActionListener(new AccionAbrirMenuCocinero());
             return boton;
         }
 

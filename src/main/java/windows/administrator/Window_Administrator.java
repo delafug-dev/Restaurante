@@ -7,9 +7,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class Window_Administrator extends JFrame {
-
-
     public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+
+
+
 
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
 
@@ -17,7 +18,7 @@ public class Window_Administrator extends JFrame {
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
+        // window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
         window.setSize(pantalla); // indica tamaño de la ventana
 
         JPanel panel = pane();
