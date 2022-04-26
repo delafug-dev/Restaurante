@@ -25,8 +25,36 @@ public class Cliente extends JFrame{
 
         //Obtenemos los productos
         List<Producto> listaProductos = Productobd.obtenerProductos();
-        // Map<TipoProducto, List<Producto>> productosPorTipo = listaProductos.stream().collect(Collectors.groupingBy(Producto::getTipoProducto));
+        Map<Tipoproducto, List<Producto>> productosPorTipo = listaProductos.stream().collect(Collectors.groupingBy(Producto::getTipoproducto));
 
+        for (Tipoproducto tipoProducto : productosPorTipo.keySet()) {
+            JPanel panelpestana = panelPrincipal;
+            panelpestana.setLayout(new BorderLayout());
+            JPanel panelProductos = new JPanel(new GridLayout(0, 2));
+            panelProductos.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 300));
+            panelProductos.setOpaque(false);
+
+            for (Producto p : productosPorTipo.get(tipoProducto)) {
+                JLabel nombreProducto = new JLabel(p.getDescripcion());
+                nombreProducto.setForeground(Color.BLACK);
+                nombreProducto.setFont(new Font("Comic Sans", Font.PLAIN, 24));
+                JLabel precioPequenya = new JLabel(p.getPequenya() + "€");
+                JLabel precioMedia = new JLabel(p.getMedia() + "€");
+                JLabel precioGrande = new JLabel(p.getGrande() + "€");
+                precioPequenya.setForeground(Color.BLACK);
+                precioPequenya.setFont(new Font("Comic Sans", Font.PLAIN, 24));
+                precioMedia.setForeground(Color.BLACK);
+                precioMedia.setFont(new Font("Comic Sans", Font.PLAIN, 24));
+                precioGrande.setForeground(Color.BLACK);
+                precioGrande.setFont(new Font("Comic Sans", Font.PLAIN, 24));
+                panelProductos.add(nombreProducto);
+                panelProductos.add(precioPequenya);
+                panelProductos.add(precioMedia);
+                panelProductos.add(precioGrande);
+            }
+            panelpestana.add(panelProductos,BorderLayout.CENTER);
+            pestayas.add(tipoProducto.toString(),panelpestana);
+        }
 
         panelPrincipal.add(pestayas);
 
@@ -36,19 +64,17 @@ public class Cliente extends JFrame{
         setSize(pantalla);
         setVisible(true);
     }
-
-
-    private static ImageIcon rutaDeImagen(){
+    private static ImageIcon rutaDeImagen () {
         String ruta = new File("").getAbsolutePath() + "\\imagenes\\fondoCarta.jpg";
         ImageIcon imagenCarta = new ImageIcon(ruta);
         Image cambiar_tamayo = imagenCarta.getImage()
-                .getScaledInstance(1400,pantalla.height, Image.SCALE_SMOOTH);
+                .getScaledInstance(1400, pantalla.height, Image.SCALE_SMOOTH);
         imagenCarta.setImage(cambiar_tamayo);
         return imagenCarta;
     }
 
-    private static JPanel crearPanelImagenFondo(){
-        JPanel panel = new JPanel(new BorderLayout()){
+    public static JPanel crearPanelImagenFondo () {
+        JPanel panel = new JPanel(new BorderLayout()) {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(imagenFondo.getImage(), 0, 0, null);

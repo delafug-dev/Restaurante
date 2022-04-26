@@ -46,13 +46,13 @@ public class Productobd extends Configuracion{
             List<Producto> productos = new ArrayList<>();
 
             try {
-                PreparedStatement query = con.prepareStatement("SELECT descripcion, tamaño, tipo_producto FROM producto ");
+                PreparedStatement query = con.prepareStatement("SELECT descripcion, tamaño, tipo_producto, pequenya, media, grande FROM producto ");
                 ResultSet rs = query.executeQuery();
 
                 //Recorremos los datos
                 while (rs.next()) {
                     Producto producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
-                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                            rs.getInt("tamayo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
                             rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 
