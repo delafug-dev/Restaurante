@@ -60,6 +60,9 @@ public class Producto {
         return id;
     }
 
+    public Producto() {
+    }
+
     public void setId(int id) {
         this.id = id;
     }

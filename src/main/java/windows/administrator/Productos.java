@@ -1,5 +1,9 @@
 package windows.administrator;
 
+import bbdd.Productobd;
+import modelos.Producto;
+import modelos.Tipoproducto;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +17,12 @@ public class Productos extends JFrame{
     private static final ImageIcon imagenFondo = new ImageIcon(rutaDeImagen());
     JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
     static Font fuente=new Font("Arial", Font.ITALIC, 30);
+    private static JTextField codigo;
+    private static JTextField id;
+    private static JTextField descripcion;
+    private static JTextField preciotapa;
+    private static JTextField preciomedia;
+    private static JTextField precioentera;
 
     public Productos() {
 
@@ -32,27 +42,27 @@ public class Productos extends JFrame{
         boton_eliminar = boton_eliminar();
         boton_buscar = boton_buscar();
         JLabel etiquetaid = id();
-        JTextField id = new JTextField();
+        id = new JTextField();
         etiquetaid.setLabelFor(id);
 
         JLabel etiquetacodigo = codigo();
-        JTextField codigo = new JTextField();
+        descripcion = new JTextField();
         etiquetacodigo.setLabelFor(codigo);
 
         JLabel etiquetadescripcion = descripcion();
-        JTextField descripcion = new JTextField();
+        codigo = new JTextField();
         etiquetadescripcion.setLabelFor(descripcion);
 
         JLabel etiquetaprecio = precioTapa();
-        JTextField preciotapa = new JTextField();
+        preciotapa = new JTextField();
         etiquetaprecio.setLabelFor(preciotapa);
 
         JLabel etiquetapreciomedia = precioMedia();
-        JTextField preciomedia = new JTextField();
+        preciomedia = new JTextField();
         etiquetaprecio.setLabelFor(preciomedia);
 
         JLabel etiquetaentera = precioRacion();
-        JTextField precioentera = new JTextField();
+        precioentera = new JTextField();
         etiquetaprecio.setLabelFor(precioentera);
 
         panel.add(etiquetaid);
@@ -144,34 +154,44 @@ public class Productos extends JFrame{
             boton.setFocusPainted(false);
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Se ha pulsado el botón cocinero");
+                    Producto producto = new Producto();
+                    producto.setId(Integer.parseInt(id.getText()));
+                    producto.setDescripcion(codigo.getText());
+                    producto.setTipoproducto(Tipoproducto.valueOf(descripcion.getText()));
+                    producto.setPequenya(Double.parseDouble(preciotapa.getText()));
+                    producto.setMedia(Double.parseDouble(preciomedia.getText()));
+                    producto.setGrande(Double.parseDouble(precioentera.getText()));
+                    Productobd.crearActualizarProducto(producto);
                 }
+
             });
             // boton.addActionListener(new AccionAbrirMenuCocinero());
             return boton;
         }
     private static JButton boton_buscar() {
-
         JButton boton = new JButton("Buscar");
         boton.setFocusPainted(false);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Se ha pulsado el botón cocinero");
+                Integer producto = Integer.valueOf(id.getText());
+
+                Productobd.obtenerPorId(producto);
+
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
     private static JButton boton_eliminar() {
-
         JButton boton = new JButton("Eliminar");
         boton.setFocusPainted(false);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Se ha pulsado el botón cocinero");
+                Producto producto = new Producto();
+                producto.setId(Integer.parseInt(id.getText()));
+                Productobd.eliminarProducto(producto);
             }
         });
-        // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
     private static JButton boton_modificar() {

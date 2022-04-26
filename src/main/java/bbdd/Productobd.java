@@ -25,7 +25,7 @@ public class Productobd extends Configuracion{
                 //Recorremos los datos
                 while (rs.next()) {
                     producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
-                            rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")],
+                            rs.getInt("tamaño"), Tipoproducto.values()[rs.getInt("tipo_producto")],
                             rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
                 }
 
@@ -84,14 +84,16 @@ public class Productobd extends Configuracion{
             Connection con = conectarConBD();
 
             try {
-                PreparedStatement insert = con.prepareStatement("insert into producto (id, descripcion,tamaño ,tipo_producto)" +
-                        "values(?,?,?,?)");
+                PreparedStatement insert = con.prepareStatement("insert into producto (id, descripcion,tamaño ,tipo_producto, pequenya, media, grande)" +
+                        "values(?,?,?,?,?,?,?)");
 
                 insert.setInt(1, producto.getId());
                 insert.setString(2,producto.getDescripcion());
                 insert.setInt(3, producto.getTamayo());
                 insert.setInt(4, producto.getTipoproducto().ordinal());
-
+                insert.setDouble(5,producto.getPequenya());
+                insert.setDouble(6, producto.getMedia());
+                insert.setDouble(7, producto.getGrande());
                 //Ejecución del insert
                 insert.executeUpdate();
 
