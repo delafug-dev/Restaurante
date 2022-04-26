@@ -1,4 +1,5 @@
-/**package bbdd;
+package bbdd;
+import modelos.TipoTamañoProducto;
 import modelos.Tipoproducto;
 import modelos.Producto;
 
@@ -10,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Productobd extends Configuracion{
-
-    public class ProductoBD extends UtilidadesBD {
 
         public static Producto obtenerPorId(Integer id) {
 
@@ -27,6 +26,8 @@ public class Productobd extends Configuracion{
                 while (rs.next()) {
                     producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
                             rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")]);
+
+
                 }
 
             } catch (SQLException sqle) {
@@ -54,6 +55,7 @@ public class Productobd extends Configuracion{
                     Producto producto = new Producto( rs.getString("descripcion"),
                             rs.getInt("tipo"), Tipoproducto.values()[rs.getInt("tipo_producto")]);
                     productos.add(producto);
+
                 }
 
             } catch (SQLException sqle) {
@@ -156,6 +158,6 @@ public class Productobd extends Configuracion{
         }
 
 
-    }
+
 }
- **/
+

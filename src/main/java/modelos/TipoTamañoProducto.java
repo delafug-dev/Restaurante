@@ -15,6 +15,9 @@ public class TipoTamañoProducto {
         this.grande = grande;
     }
 
+    public TipoTamañoProducto(){
+    }
+
     public int getId() {
         return id;
     }
