@@ -81,7 +81,6 @@ public class Productos extends JFrame{
        //Añado archivos en Panel de los botones.
         panel2.add(boton_crear);
         panel2.add(boton_buscar);
-        panel2.add(boton_modificar);
         panel2.add(boton_eliminar);
 
 
@@ -192,17 +191,19 @@ public class Productos extends JFrame{
         });
         return boton;
     }
+
     private static JButton boton_modificar() {
 
         JButton boton = new JButton("Modificar");
         boton.setFocusPainted(false);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Se ha pulsado el botón cocinero");
+                Producto producto = new Producto();
+                producto.setId(Integer.parseInt(id.getText()));
+                Productobd.actualizarProducto(producto);
             }
         });
-        // boton.addActionListener(new AccionAbrirMenuCocinero());
-        return boton;
+                return boton;
     }
 
 

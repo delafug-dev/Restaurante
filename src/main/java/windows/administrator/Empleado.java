@@ -74,7 +74,6 @@ public class Empleado extends JFrame{
             //Añado archivos en Panel de los botones.
             panel2.add(boton_crear);
             panel2.add(boton_buscar);
-            panel2.add(boton_modificar);
             panel2.add(boton_eliminar);
 
 

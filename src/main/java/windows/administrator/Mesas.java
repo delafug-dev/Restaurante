@@ -56,7 +56,6 @@ public class Mesas extends JFrame {
 
         botones.add(crear);
         botones.add(buscar);
-        botones.add(modificar);
         botones.add(eliminar);
 
         formulario.setOpaque(false);
