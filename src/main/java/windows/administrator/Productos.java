@@ -173,7 +173,9 @@ public class Productos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Se ha pulsado el botón buscar");
                 Integer idproducto = Integer.valueOf(id.getText());
-                Productobd.obtenerPorId(idproducto);
+                Producto p= Productobd.obtenerPorId(idproducto);
+                id.setText(String.valueOf(p.getId()));
+                descripcion.setText((String.valueOf(p.getDescripcion())));
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
