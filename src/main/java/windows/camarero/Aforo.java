@@ -1,13 +1,14 @@
 package windows.camarero;
 
-import windows.administrator.Empleado;
-import windows.administrator.Productos;
+import bbdd.MesasBD;
+import modelos.Mesa;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static windows.Window.pantalla;
 
@@ -24,22 +25,30 @@ public class Aforo extends JFrame{
         JPanel panel2 = pane2();
         JPanel fondo = crearPanelImagenFondo();
         panel2.setOpaque(false);
+        JPanel panelBoton = new JPanel();
+        panelBoton.setBounds(520,420,225,180);
+        panelBoton.setOpaque(false);
+        JButton botonAñadir = aforoMesaOcupada();
+        botonAñadir.setPreferredSize(new Dimension(250,100));
+        panelBoton.add(botonAñadir);
 
 
         SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
         JSpinner numeroProductos = new JSpinner(model);
+        List<Mesa> mesa = MesasBD.obtenerMesapedido();
 
 
         //TABLA COMANDA
         Object[] columnas = {"Nº Mesa",
                 "Ocupada"};
-        Object[][] datos = {{"",""}};
+        Object[][] datos = {{mesa,""}};
         JTable tablaComanda = new JTable(datos , columnas);
 
         //PANEL TABLA COMANDA
         JScrollPane scrollPane = new JScrollPane(tablaComanda);
         tablaComanda.setFillsViewportHeight(true);
 
+        window.add(panelBoton);
         panel2.add(scrollPane);
         window.add(panel2);
         window.add(fondo);
@@ -71,6 +80,40 @@ public class Aforo extends JFrame{
         panel.setBounds(300, 300, 600, 100);
         return panel;
     }
+
+    JButton aforoMesaOcupada (){
+        JButton mesaOcupada = new JButton("Añadir Mesa");
+        /** generarPDF.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+
+         }
+         }); **/
+        return mesaOcupada;
+    }
+
+    private JTable tablaComanda(){
+        JTable tablaComanda = new JTable();
+
+        return tablaComanda;
+    }
+
+    private void actualizarContenidoTabla(Mesa mesa){
+
+        DefaultTableModel model = (DefaultTableModel) tablaComanda().getModel();
+        model.setRowCount(0);
+        List<Mesa> mesa2 = MesasBD.obtenerMesapedido();
+
+        if(mesa != null){
+            for (Mesa m : mesa2) {
+                model = (DefaultTableModel) tablaComanda().getModel();
+                model.addRow(new Object[]{mesa.getNum_mesa()});
+
+            }
+            tablaComanda().repaint();
+        }
+
+    }
+
 
 }
 

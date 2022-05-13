@@ -1,7 +1,12 @@
 package windows.camarero;
 
+import bbdd.MesasBD;
+import modelos.Mesa;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import static windows.Window.pantalla;
@@ -14,8 +19,14 @@ public class Cuenta extends JFrame{
     public Cuenta(){
         // JPANELS
         JPanel panelCuenta = new JPanel();
-        panelCuenta.setLayout(new GridLayout(1,0));
+        panelCuenta.setLayout(new GridLayout(1,2));
         panelCuenta.setBounds(275,160,700,220);
+        JPanel panelParaBotonPDF = new JPanel();
+        panelParaBotonPDF.setBounds(520,410,225,180);
+        panelParaBotonPDF.setOpaque(false);
+        JButton pdfCuenta = crearBotonPDF();
+        pdfCuenta.setPreferredSize(new Dimension(250,100));
+        panelParaBotonPDF.add(pdfCuenta);
 
 
         //TABLA COMANDA
@@ -31,6 +42,7 @@ public class Cuenta extends JFrame{
         JPanel panelFondo = crearPanelImagenFondo();
 
         panelCuenta.add(scrollPane);
+        panelPrincipal.add(panelParaBotonPDF);
         panelPrincipal.add(panelCuenta);
         panelPrincipal.add(panelFondo);
 
@@ -58,6 +70,16 @@ public class Cuenta extends JFrame{
             }
         };
         return panel;
+    }
+
+    private static JButton crearBotonPDF (){
+        JButton generarPDF = new JButton("CUENTA TOTAL");
+        /** generarPDF.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }); **/
+        return generarPDF;
     }
 
 }
