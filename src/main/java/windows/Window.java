@@ -95,11 +95,6 @@ public class Window extends JFrame {
         boton.setForeground(Color.WHITE);
         boton.setBackground(Color.BLACK);
         // boton.setBorder(empty);
-        boton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Se ha pulsado el botón cliente");
-            }
-        });
         boton.addActionListener(new accionCliente());
         return boton;
     }
