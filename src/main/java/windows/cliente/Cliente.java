@@ -21,18 +21,25 @@ public class Cliente extends JFrame{
 
         // Panel por pestañas
         JTabbedPane pestayas = new JTabbedPane();
-        pestayas.setOpaque(false);
 
         //Obtenemos los productos
         List<Producto> listaProductos = Productobd.obtenerProductos();
         Map<Tipoproducto, List<Producto>> productosPorTipo = listaProductos.stream().collect(Collectors.groupingBy(Producto::getTipoproducto));
 
         for (Tipoproducto tipoProducto : productosPorTipo.keySet()) {
-            JPanel panelpestana = panelPrincipal;
+            JPanel panelpestana = new JPanel();
             panelpestana.setLayout(new BorderLayout());
-            JPanel panelProductos = new JPanel(new GridLayout(0, 2));
+            JPanel panelProductos = new JPanel(new GridLayout(0, 4));
             panelProductos.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 300));
             panelProductos.setOpaque(false);
+            JLabel producto = new JLabel("Producto");
+            JLabel pequeyo = new JLabel("Pequeño");
+            JLabel mediano = new JLabel("Mediano");
+            JLabel grande = new JLabel("Grande");
+            panelProductos.add(producto);
+            panelProductos.add(pequeyo);
+            panelProductos.add(mediano);
+            panelProductos.add(grande);
 
             for (Producto p : productosPorTipo.get(tipoProducto)) {
                 JLabel nombreProducto = new JLabel(p.getDescripcion());
@@ -54,9 +61,10 @@ public class Cliente extends JFrame{
             }
             panelpestana.add(panelProductos,BorderLayout.CENTER);
             pestayas.add(tipoProducto.toString(),panelpestana);
-        }
 
+        }
         panelPrincipal.add(pestayas);
+        panelPrincipal.setOpaque(false);
 
         // CONFIGURACION CARTA
         setResizable(false);
