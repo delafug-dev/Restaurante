@@ -1,4 +1,8 @@
 package windows.camarero;
+import bbdd.MesasBD;
+import bbdd.Productobd;
+import modelos.Mesa;
+import modelos.Producto;
 import windows.administrator.Productos;
 
 import javax.swing.*;
@@ -6,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static windows.Window.pantalla;
 import javax.swing.*;
@@ -108,13 +114,21 @@ public class Pedido extends JFrame{
         return panel;
     }
     private void rellenarComboMesas(JComboBox comboBox){
-        comboBox.addItem("Mesa 1");
-        comboBox.addItem("Mesa 2");
-        comboBox.addItem("Mesa 3");
-        comboBox.addItem("Mesa 4");
+        List<Mesa> mesa = MesasBD.obtenerMesapedido();
+        for(Mesa m : mesa){
+            comboBox.addItem(m.getNum_mesa());
+        }
+
+    }
+    private void rellenarComboProducto(JComboBox comboBox){
+        List<Producto> producto = Productobd.obtenerProductopedido();
+        for(Producto p : producto){
+            comboBox.addItem(p.getDescripcion());
+        }
+
     }
     private void rellenarComboCamarero(JComboBox comboBox){
-        comboBox.addItem("Camarero 1");
+
         comboBox.addItem("Camarero 2");
     }
     public static JLabel mesa(){

@@ -39,6 +39,33 @@ public class MesasBD extends Configuracion{
         return mesa;
     }
 
+    public static List<Mesa> obtenerMesapedido() {
+
+        Connection con = conectarConBD();
+        Mesa mesa = null;
+        List<Mesa> mesapedido = new ArrayList<>();
+
+        try {
+            PreparedStatement query = con.prepareStatement("SELECT * FROM mesa");
+            ResultSet rs = query.executeQuery();
+
+            //Recorremos los datos
+            while (rs.next()) {
+                mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), rs.getInt("num_comensales"));
+                mesapedido.add(mesa);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+
+        return mesapedido;
+    }
+
     public static List<Mesa> obtenerProductos() {
 
         Connection con = conectarConBD();

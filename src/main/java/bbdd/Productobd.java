@@ -1,4 +1,5 @@
 package bbdd;
+import modelos.Mesa;
 import modelos.Tipoproducto;
 import modelos.Producto;
 
@@ -39,8 +40,36 @@ public class Productobd extends Configuracion{
 
             return producto;
         }
+    public static List<Producto> obtenerProductopedido() {
 
-        public static List<Producto> obtenerProductos() {
+        Connection con = conectarConBD();
+        Producto producto = null;
+        List<Producto> p = new ArrayList<>();
+
+        try {
+            PreparedStatement query = con.prepareStatement("SELECT * FROM producto");
+            ResultSet rs = query.executeQuery();
+
+            //Recorremos los datos
+            while (rs.next()) {
+                producto = new Producto(rs.getInt("id"), rs.getString("descripcion"),
+                        Tipoproducto.values()[rs.getInt("tipo_producto")],
+                        rs.getDouble("pequenya"), rs.getDouble("media"), rs.getDouble("grande"));
+                p.add(producto);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+
+        return p;
+    }
+
+    public static List<Producto> obtenerProductos() {
 
             Connection con = conectarConBD();
             List<Producto> productos = new ArrayList<>();
