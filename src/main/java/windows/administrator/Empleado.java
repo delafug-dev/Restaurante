@@ -74,7 +74,6 @@ public class Empleado extends JFrame{
             //Añado archivos en Panel de los botones.
             panel2.add(boton_crear);
             panel2.add(boton_buscar);
-            panel2.add(boton_modificar);
             panel2.add(boton_eliminar);
 
 
@@ -143,13 +142,18 @@ public class Empleado extends JFrame{
             // boton.addActionListener(new AccionAbrirMenuCocinero());
             return boton;
             }
+
         private static JButton boton_buscar() {
             JButton boton = new JButton("Buscar");
             boton.setFocusPainted(false);
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Integer empleado = Integer.valueOf(id.getText());
-                    Productobd.obtenerPorId(empleado);
+                    ModeloEmpleado empl = EmpleadoBD.obtenerPorId(empleado);
+                    id.setText(String.valueOf(empl.getId()));
+                    codigo_empleado.setText(String.valueOf(empl.getCodigoEmpleado()));
+                    nombre.setText(String.valueOf(empl.getNombre()));
+                    apellidos.setText(String.valueOf(empl.getApellidos()));
                 }
             });
             // boton.addActionListener(new AccionAbrirMenuCocinero());
