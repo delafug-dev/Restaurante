@@ -53,7 +53,16 @@ public class Mesas extends JFrame {
                 MesasBD.eliminarProducto(mesa);
             }
         });
-
+        buscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Mesa mesa = new Mesa();
+                Integer idmesa = Integer.valueOf(fieldId.getText());
+                Mesa m= MesasBD.obtenerPorId(idmesa);
+                fieldId.setText(String.valueOf(m.getId()));
+                fieldNumMesa.setText((String.valueOf(m.getNum_mesa())));
+                fieldNumComensales.setText((String.valueOf(m.getNum_comensales())));
+            }
+        });
         botones.add(crear);
         botones.add(buscar);
         botones.add(eliminar);

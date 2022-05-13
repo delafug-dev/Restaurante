@@ -175,7 +175,12 @@ public class Productos extends JFrame{
                 Integer idproducto = Integer.valueOf(id.getText());
                 Producto p= Productobd.obtenerPorId(idproducto);
                 id.setText(String.valueOf(p.getId()));
-                descripcion.setText((String.valueOf(p.getDescripcion())));
+                codigo.setText((String.valueOf(p.getDescripcion())));
+                descripcion.setText((String.valueOf(p.getTipoproducto())));
+                preciotapa.setText(String.valueOf(p.getPequenya()));
+                preciomedia.setText(String.valueOf(p.getMedia()));
+                precioentera.setText(String.valueOf(p.getGrande()));
+
             }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
