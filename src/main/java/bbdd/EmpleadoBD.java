@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpleadoBD extends Configuracion {
 
@@ -34,6 +36,33 @@ public class EmpleadoBD extends Configuracion {
         }
 
         return empleado;
+    }
+
+    public static List<ModeloEmpleado> obtenerEmpleadopedido() {
+
+        Connection con = conectarConBD();
+        ModeloEmpleado empleado = null;
+        List<ModeloEmpleado> empl = new ArrayList<>();
+
+        try {
+            PreparedStatement query = con.prepareStatement("SELECT * FROM empleado  ");
+            ResultSet rs = query.executeQuery();
+
+            //Recorremos los datos
+            while (rs.next()) {
+                empleado = new ModeloEmpleado(rs.getInt("id"), rs.getString("codigo_empleado"), rs.getString("nombre"), rs.getString("apellidos"));
+                empl.add(empleado);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+
+        return empl;
     }
 
 

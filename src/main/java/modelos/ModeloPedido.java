@@ -2,21 +2,25 @@ package modelos;
 
 import java.util.Objects;
 
-public class Pedido {
+public class ModeloPedido {
     private int id;
     private String mesa;
     private int camarero;
     private String producto;
     private int cantidad;
 
-    public Pedido(int id, String mesa, int camarero, String producto, int cantidad) {
+    public ModeloPedido(int id, String mesa, int camarero, String producto, int cantidad) {
         this.id = id;
         this.mesa = mesa;
         this.camarero = camarero;
         this.producto = producto;
         this.cantidad = cantidad;
     }
-    public Pedido( String mesa) {
+
+    public ModeloPedido() {
+    }
+
+    public ModeloPedido(String mesa) {
         this.mesa = mesa;
     }
 
@@ -64,7 +68,7 @@ public class Pedido {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
+        ModeloPedido pedido = (ModeloPedido) o;
         return id == pedido.id && camarero == pedido.camarero && cantidad == pedido.cantidad && Objects.equals(mesa, pedido.mesa) && Objects.equals(producto, pedido.producto);
     }
 
