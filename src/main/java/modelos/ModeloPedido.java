@@ -5,11 +5,11 @@ import java.util.Objects;
 public class ModeloPedido {
     private int id;
     private String mesa;
-    private int camarero;
+    private String camarero;
     private String producto;
     private int cantidad;
 
-    public ModeloPedido(int id, String mesa, int camarero, String producto, int cantidad) {
+    public ModeloPedido(int id, String mesa, String camarero, String producto, int cantidad) {
         this.id = id;
         this.mesa = mesa;
         this.camarero = camarero;
@@ -18,10 +18,6 @@ public class ModeloPedido {
     }
 
     public ModeloPedido() {
-    }
-
-    public ModeloPedido(String mesa) {
-        this.mesa = mesa;
     }
 
     public int getId() {
@@ -40,11 +36,11 @@ public class ModeloPedido {
         this.mesa = mesa;
     }
 
-    public int getCamarero() {
+    public String getCamarero() {
         return camarero;
     }
 
-    public void setCamarero(int camarero) {
+    public void setCamarero(String camarero) {
         this.camarero = camarero;
     }
 
@@ -68,8 +64,8 @@ public class ModeloPedido {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ModeloPedido pedido = (ModeloPedido) o;
-        return id == pedido.id && camarero == pedido.camarero && cantidad == pedido.cantidad && Objects.equals(mesa, pedido.mesa) && Objects.equals(producto, pedido.producto);
+        ModeloPedido that = (ModeloPedido) o;
+        return id == that.id && cantidad == that.cantidad && Objects.equals(mesa, that.mesa) && Objects.equals(camarero, that.camarero) && Objects.equals(producto, that.producto);
     }
 
     @Override
@@ -79,10 +75,10 @@ public class ModeloPedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
+        return "ModeloPedido{" +
                 "id=" + id +
                 ", mesa='" + mesa + '\'' +
-                ", camarero=" + camarero +
+                ", camarero='" + camarero + '\'' +
                 ", producto='" + producto + '\'' +
                 ", cantidad=" + cantidad +
                 '}';

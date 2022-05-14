@@ -6,6 +6,7 @@ import modelos.Mesa;
 import modelos.ModeloEmpleado;
 import modelos.ModeloPedido;
 import modelos.Producto;
+import bbdd.PedidoBD;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,7 @@ public class Pedido extends JFrame{
     private static JComboBox comboMesas;
     private static JComboBox comboCamarero;
     private static JComboBox comboProducto;
+    private static SpinnerModel model;
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
         private static final ImageIcon imagenFondo = rutaDeImagen();
         public Pedido(){
@@ -50,7 +52,7 @@ public class Pedido extends JFrame{
             rellenarComboProducto(comboProducto);
             //Cantidad
             JLabel etiquetaLabel = cantidad();
-            SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
+            model = new SpinnerNumberModel(1, 1, 100, 1);
             JSpinner numeroProductos = new JSpinner(model);
             //Botón añadir
             JButton botonAñadir = boton_añadir();
@@ -88,9 +90,12 @@ public class Pedido extends JFrame{
         boton.setFocusPainted(false);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ModeloPedido pedido = new ModeloPedido();
-                pedido.setMesa(String.valueOf(comboMesas.getSelectedItem()));
-                pedido.setCamarero((Integer.parseInt(String.valueOf(comboCamarero.getSelectedItem()))));
+                ModeloPedido ped = new ModeloPedido();
+                ped.setMesa(String.valueOf(comboMesas.getSelectedItem()));
+                ped.setCamarero(String.valueOf(comboCamarero.getSelectedItem()));
+                ped.setProducto(String.valueOf(comboProducto.getSelectedItem()));
+                ped.setCantidad(Integer.parseInt(String.valueOf(model.getValue())));
+                PedidoBD.crearPedido(ped);
             }
 
         });
