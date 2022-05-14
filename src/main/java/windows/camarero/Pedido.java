@@ -9,6 +9,7 @@ import modelos.Producto;
 import bbdd.PedidoBD;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ public class Pedido extends JFrame{
     private static JComboBox comboMesas;
     private static JComboBox comboCamarero;
     private static JComboBox comboProducto;
+    private static JTable tablaComanda;
     private static SpinnerModel model;
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
         private static final ImageIcon imagenFondo = rutaDeImagen();
@@ -56,6 +58,8 @@ public class Pedido extends JFrame{
             JSpinner numeroProductos = new JSpinner(model);
             //Botón añadir
             JButton botonAñadir = boton_añadir();
+            JButton botonbuscar = boton_buscar();
+            JButton botonborrar = new JButton("borrar");
 
             panel.add(etiquetaMesa);
             panel.add(comboMesas);
@@ -66,13 +70,15 @@ public class Pedido extends JFrame{
             panel.add(etiquetaLabel);
             panel.add(numeroProductos);
             panel.add(botonAñadir);
+            panel.add(botonbuscar);
+            panel.add(botonborrar);
 
             //TABLA COMANDA
             Object[] columnas = {"Producto",
                     "Cantidad",
-                    "Importe por unidad"};
+                    "Mesa"};
             Object[][] datos = {{"","",""}};
-            JTable tablaComanda = new JTable(datos , columnas);
+            tablaComanda = new JTable(datos , columnas);
 
             //PANEL TABLA COMANDA
             JScrollPane scrollPane = new JScrollPane(tablaComanda);
@@ -102,6 +108,27 @@ public class Pedido extends JFrame{
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
+    private static JButton boton_buscar() {
+        JButton boton = new JButton("Buscar");
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer pedido = Integer.valueOf((String.valueOf(comboMesas.getSelectedItem())));
+                List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
+                int i = 0;
+
+                for(ModeloPedido mp: pedi){
+
+                }
+                tablaComanda.repaint();
+            }
+
+
+
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
     private static ImageIcon rutaDeImagen(){
         String ruta = new File("").getAbsolutePath() + "\\imagenes\\pedido.jpg";
         ImageIcon imagenMesa = new ImageIcon(ruta);
@@ -121,7 +148,7 @@ public class Pedido extends JFrame{
     }
     private static JPanel pane() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 0, 5,5));
+        panel.setLayout(new GridLayout(6, 0, 5,5));
         panel.setBounds(50, 50, 600, 300);
         return panel;
     }

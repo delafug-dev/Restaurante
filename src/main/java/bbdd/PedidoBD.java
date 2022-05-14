@@ -1,10 +1,15 @@
 package bbdd;
 
+import modelos.Mesa;
 import modelos.ModeloPedido;
+import windows.camarero.Pedido;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static bbdd.Configuracion.cerrarConexion;
 import static bbdd.Configuracion.conectarConBD;
@@ -36,5 +41,33 @@ public class PedidoBD extends Configuracion{
             cerrarConexion(con);
         }
     }
+    public static List<ModeloPedido> obtenerPormesa(Integer mesa) {
+
+        Connection con = conectarConBD();
+        ModeloPedido num_mesa = null;
+        List<ModeloPedido> lista_mesa = new ArrayList<>();
+
+        try {
+            PreparedStatement query = con.prepareStatement("SELECT * FROM pedido where mesa = ?  ");
+            query.setInt(1, mesa);
+            ResultSet rs = query.executeQuery();
+
+            //Recorremos los datos
+            while (rs.next()) {
+                num_mesa = new ModeloPedido(rs.getInt("id"), rs.getString("mesa"), rs.getString("camarero"), rs.getString("producto"), rs.getInt("cantidad"));
+                lista_mesa.add(num_mesa);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+
+        return lista_mesa;
+    }
+
 
 }
