@@ -2,6 +2,7 @@ package bbdd;
 
 import modelos.Mesa;
 import modelos.ModeloPedido;
+import modelos.Producto;
 import windows.camarero.Pedido;
 
 import java.sql.Connection;
@@ -68,6 +69,28 @@ public class PedidoBD extends Configuracion{
 
         return lista_mesa;
     }
+    public static void eliminarPedidos(ModeloPedido mesa){
+        Connection con = conectarConBD();
+
+        try {
+            PreparedStatement delete = con.prepareStatement("delete from pedido where mesa = ? ");
+
+            delete.setString(1, mesa.getMesa());
+
+            //Ejecución del delete
+            delete.executeUpdate();
+
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+    }
+
+
 
 
 }

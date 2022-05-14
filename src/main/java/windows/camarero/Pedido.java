@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import static windows.Window.pantalla;
@@ -24,6 +25,7 @@ public class Pedido extends JFrame{
     private static JComboBox comboCamarero;
     private static JComboBox comboProducto;
     private static JTable tablaComanda;
+    private static List<ModeloPedido> pedi = new ArrayList<>();
     private static SpinnerModel model;
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
         private static final ImageIcon imagenFondo = rutaDeImagen();
@@ -59,7 +61,7 @@ public class Pedido extends JFrame{
             //Botón añadir
             JButton botonAñadir = boton_añadir();
             JButton botonbuscar = boton_buscar();
-            JButton botonborrar = new JButton("borrar");
+            JButton botonborrar = boton_eliminar();
 
             panel.add(etiquetaMesa);
             panel.add(comboMesas);
@@ -74,11 +76,12 @@ public class Pedido extends JFrame{
             panel.add(botonborrar);
 
             //TABLA COMANDA
+
             Object[] columnas = {"Producto",
                     "Cantidad",
                     "Mesa"};
             Object[][] datos = {{"","",""}};
-            tablaComanda = new JTable(datos , columnas);
+            tablaComanda = new JTable(new DefaultTableModel(datos,columnas));
 
             //PANEL TABLA COMANDA
             JScrollPane scrollPane = new JScrollPane(tablaComanda);
@@ -108,6 +111,19 @@ public class Pedido extends JFrame{
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
     }
+    private static JButton boton_eliminar() {
+        JButton boton = new JButton("Borrar");
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ModeloPedido pedido = new ModeloPedido();
+                pedido.setMesa(String.valueOf(comboMesas.getSelectedItem()));
+                PedidoBD.eliminarPedidos(pedido);
+            }
+        });
+        return boton;
+    }
+
     private static JButton boton_buscar() {
         JButton boton = new JButton("Buscar");
         boton.setFocusPainted(false);
@@ -115,16 +131,22 @@ public class Pedido extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Integer pedido = Integer.valueOf((String.valueOf(comboMesas.getSelectedItem())));
                 List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
-                int i = 0;
+                int i = 1;
+                int columna = 1;
 
-                for(ModeloPedido mp: pedi){
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
+                modelo.setRowCount(0);
 
+                if(pedi != null){
+                    for(ModeloPedido mp: pedi){
+                        modelo = (DefaultTableModel) tablaComanda.getModel();
+                        modelo.addRow(new Object[]{mp.getProducto(), mp.getCantidad(), mp.getMesa()});
                 }
                 tablaComanda.repaint();
             }
 
 
-
+            }
         });
         // boton.addActionListener(new AccionAbrirMenuCocinero());
         return boton;
