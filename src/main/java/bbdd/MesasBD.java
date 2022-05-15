@@ -76,8 +76,8 @@ public class MesasBD extends Configuracion{
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                Mesa mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), Libre.values()[rs.getInt("libre")]);
-
+                Mesa mesa = new Mesa( rs.getInt("num_mesa"), Libre.values()[rs.getInt("libre")]);
+                mesas.add(mesa);
             }
 
         } catch (SQLException sqle) {
@@ -140,6 +140,30 @@ public class MesasBD extends Configuracion{
             update.setInt(1,mesa.getNum_mesa());
             update.setInt(2, mesa.getLibre().ordinal());
             update.setInt(3, mesa.getId());
+
+
+            //Ejecución del update
+            update.executeUpdate();
+
+
+        } catch (SQLException sqle) {
+            System.out.println("Error en la ejecución:"
+                    + sqle.getErrorCode() + " " + sqle.getMessage());
+
+        } finally {
+            cerrarConexion(con);
+        }
+    }
+    public static void actualizarMesa(Mesa mesa){
+        Connection con = conectarConBD();
+
+        try {
+            PreparedStatement update = con.prepareStatement("update mesa " +
+                    "set  libre = ? " +
+                    "where num_mesa = ? ");
+
+            update.setInt(1, mesa.getLibre().ordinal());
+            update.setInt(2,mesa.getNum_mesa());
 
 
             //Ejecución del update

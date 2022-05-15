@@ -12,6 +12,10 @@ public class Mesa {
         this.num_mesa = num_mesa;
         this.libre = libre;
     }
+    public Mesa( int num_mesa, Libre libre) {
+        this.num_mesa = num_mesa;
+        this.libre = libre;
+    }
 
     public Mesa() {
     }
