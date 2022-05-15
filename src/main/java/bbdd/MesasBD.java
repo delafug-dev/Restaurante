@@ -25,7 +25,7 @@ public class MesasBD extends Configuracion{
 
             //Recorremos los datos
             while (rs.next()) {
-                mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), rs.getInt("num_comensales"));
+                mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), Libre.values()[rs.getInt("libre")]);
             }
 
         } catch (SQLException sqle) {
@@ -51,7 +51,7 @@ public class MesasBD extends Configuracion{
 
             //Recorremos los datos
             while (rs.next()) {
-                mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), rs.getInt("num_comensales"));
+                mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), Libre.values()[rs.getInt("libre")]);
                 mesapedido.add(mesa);
             }
 
@@ -72,12 +72,11 @@ public class MesasBD extends Configuracion{
         List<Mesa> mesas = new ArrayList<>();
 
         try {
-            PreparedStatement query = con.prepareStatement("SELECT num_mesa, num_comensales FROM mesa ");
+            PreparedStatement query = con.prepareStatement("SELECT num_mesa, libre FROM mesa ");
             ResultSet rs = query.executeQuery();
 
-            //Recorremos los datos
             while (rs.next()) {
-                Mesa mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"),rs.getInt("num_comensales"));
+                Mesa mesa = new Mesa(rs.getInt("id"), rs.getInt("num_mesa"), Libre.values()[rs.getInt("libre")]);
 
             }
 
@@ -110,12 +109,12 @@ public class MesasBD extends Configuracion{
         Connection con = conectarConBD();
 
         try {
-            PreparedStatement insert = con.prepareStatement("insert into mesa (id, num_mesa,num_comensales)" +
+            PreparedStatement insert = con.prepareStatement("insert into mesa (id, num_mesa,libre)" +
                     "values(?,?,?)");
 
             insert.setInt(1, mesa.getId());
             insert.setInt(2,mesa.getNum_mesa());
-            insert.setInt(3, mesa.getNum_comensales());
+            insert.setInt(3, mesa.getLibre().ordinal());
             //Ejecución del insert
             insert.executeUpdate();
 
@@ -135,11 +134,11 @@ public class MesasBD extends Configuracion{
 
         try {
             PreparedStatement update = con.prepareStatement("update mesa " +
-                    "set num_mesa = ? , num_comensales = ? " +
+                    "set num_mesa = ? , libre = ? " +
                     "where id = ? ");
 
             update.setInt(1,mesa.getNum_mesa());
-            update.setInt(2, mesa.getNum_comensales());
+            update.setInt(2, mesa.getLibre().ordinal());
             update.setInt(3, mesa.getId());
 
 

@@ -32,7 +32,7 @@ public class Aforo extends JFrame{
 
         //TABLA COMANDA
         Object[] columnas = {"Nº Mesa",
-                "Ocupada"};
+                "Libre"};
         Object[][] datos = {{"",""}};
         JTable tablaComanda = new JTable(datos , columnas);
 

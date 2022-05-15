@@ -2,6 +2,7 @@ package windows.administrator;
 
 import bbdd.MesasBD;
 import bbdd.Productobd;
+import modelos.Libre;
 import modelos.Mesa;
 import modelos.Producto;
 import modelos.Tipoproducto;
@@ -37,7 +38,7 @@ public class Mesas extends JFrame {
                 Mesa mesa = new Mesa();
                 mesa.setId(Integer.parseInt(fieldId.getText()));
                 mesa.setNum_mesa(Integer.parseInt(fieldNumMesa.getText()));
-                mesa.setNum_comensales(Integer.parseInt(fieldNumComensales.getText()));
+                mesa.setLibre(Libre.valueOf(fieldNumComensales.getText()));
                 MesasBD.crearActualizarProducto(mesa);
             }
 
@@ -60,7 +61,7 @@ public class Mesas extends JFrame {
                 Mesa m= MesasBD.obtenerPorId(idmesa);
                 fieldId.setText(String.valueOf(m.getId()));
                 fieldNumMesa.setText((String.valueOf(m.getNum_mesa())));
-                fieldNumComensales.setText((String.valueOf(m.getNum_comensales())));
+                fieldNumComensales.setText(String.valueOf(m.getLibre()));
             }
         });
         botones.add(crear);
@@ -148,7 +149,7 @@ public class Mesas extends JFrame {
     public static JLabel num_comensales(){
         JLabel num_comensales = new JLabel();
         num_comensales.setFont(fuente);
-        num_comensales.setText("Nº Comensales");
+        num_comensales.setText("Libre");
 
         num_comensales.setForeground(Color.WHITE);
         return num_comensales;

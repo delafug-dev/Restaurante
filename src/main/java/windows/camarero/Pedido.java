@@ -185,6 +185,7 @@ public class Pedido extends JFrame{
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
         for(Mesa m : mesa){
             comboBox.addItem(m.getNum_mesa());
+
         }
 
     }
