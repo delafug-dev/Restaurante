@@ -107,7 +107,6 @@ public class EmpleadoBD extends Configuracion {
 
     public static void actualizarEmpleado(ModeloEmpleado empleado){
         Connection con = conectarConBD();
-
         try {
             PreparedStatement update = con.prepareStatement("update empleado " +
                     "set codigo_empleado = ? , nombre = ? , apellidos = ?" +

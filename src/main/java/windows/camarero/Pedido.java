@@ -100,7 +100,7 @@ public class Pedido extends JFrame{
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModeloPedido ped = new ModeloPedido();
-                ped.setMesa(String.valueOf(comboMesas.getSelectedItem()));
+                ped.setMesa(Integer.parseInt((String.valueOf(comboMesas.getSelectedItem()))));
                 ped.setCamarero(String.valueOf(comboCamarero.getSelectedItem()));
                 ped.setProducto(String.valueOf(comboProducto.getSelectedItem()));
                 ped.setCantidad(Integer.parseInt(String.valueOf(model.getValue())));
@@ -117,7 +117,7 @@ public class Pedido extends JFrame{
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModeloPedido pedido = new ModeloPedido();
-                pedido.setMesa(String.valueOf(comboMesas.getSelectedItem()));
+                pedido.setMesa(Integer.parseInt(String.valueOf(comboMesas.getSelectedItem())));
                 PedidoBD.eliminarPedidos(pedido);
             }
         });

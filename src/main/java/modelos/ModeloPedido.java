@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class ModeloPedido {
     private int id;
-    private String mesa;
+    private int mesa;
     private String camarero;
     private String producto;
     private int cantidad;
 
-    public ModeloPedido(int id, String mesa, String camarero, String producto, int cantidad) {
+    public ModeloPedido(int id, int mesa, String camarero, String producto, int cantidad) {
         this.id = id;
         this.mesa = mesa;
         this.camarero = camarero;
@@ -28,11 +28,11 @@ public class ModeloPedido {
         this.id = id;
     }
 
-    public String getMesa() {
+    public int getMesa() {
         return mesa;
     }
 
-    public void setMesa(String mesa) {
+    public void setMesa(int mesa) {
         this.mesa = mesa;
     }
 
@@ -65,7 +65,7 @@ public class ModeloPedido {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ModeloPedido that = (ModeloPedido) o;
-        return id == that.id && cantidad == that.cantidad && Objects.equals(mesa, that.mesa) && Objects.equals(camarero, that.camarero) && Objects.equals(producto, that.producto);
+        return id == that.id && mesa == that.mesa && cantidad == that.cantidad && Objects.equals(camarero, that.camarero) && Objects.equals(producto, that.producto);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ModeloPedido {
     public String toString() {
         return "ModeloPedido{" +
                 "id=" + id +
-                ", mesa='" + mesa + '\'' +
+                ", mesa=" + mesa +
                 ", camarero='" + camarero + '\'' +
                 ", producto='" + producto + '\'' +
                 ", cantidad=" + cantidad +

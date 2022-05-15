@@ -1,17 +1,31 @@
 package windows.cocinero;
 
+import bbdd.MesasBD;
+import bbdd.PedidoBD;
+import bbdd.Productobd;
+import modelos.Mesa;
+import modelos.ModeloPedido;
+import modelos.Producto;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 import static windows.Window.pantalla;
 
 public class Window_Comanda extends JFrame {
 
+    private static JComboBox comboMesa;
+    private static JComboBox comboProducto;
+    private static JTable tablaComanda1;
     private static final ImageIcon imagenFondo = rutaDeImagen();
     JPanel panelPrincipal = crearPanelImagenFondo();
 
@@ -25,12 +39,11 @@ public class Window_Comanda extends JFrame {
         //TABLA COMANDA
         Object[] columnas = {"Producto",
                 "Cantidad"};
-        Object[][] datos = {{"","",""}};
-        JTable tablaComanda = new JTable(datos , columnas);
-
+        Object[][] datos = {{"",""}};
+        tablaComanda1 = new JTable(new DefaultTableModel(datos,columnas));
         //PANEL TABLA COMANDA
-        JScrollPane scrollPane = new JScrollPane(tablaComanda);
-        tablaComanda.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(tablaComanda1);
+        tablaComanda1.setFillsViewportHeight(true);
 
         JPanel panelTabla = new JPanel();
         panelTabla.setLayout(new GridLayout(1,0));
@@ -39,20 +52,22 @@ public class Window_Comanda extends JFrame {
         JPanel panelFondo =  crearPanelImagenFondo();
 
         // JCOMBO
-        JComboBox comboMesa = new JComboBox();
-        JLabel etiquetaComboMesa = new JLabel("MESA");
-        etiquetaComboMesa.setOpaque(false);
-        rellenarComboMesa(comboMesa);
+        comboMesa = new JComboBox();
+        comboProducto = new JComboBox();
+        rellenarComboMesas(comboMesa);
+        rellenarComboProducto(comboProducto);
 
         // JBUTTON
+        JButton botonborrar = borrarProducto();
         JButton buscarComanda = buscarComanda();
         JButton addCantidad = addCantidad();
         JButton quitarCantidad = quitarCantidad();
 
 
-        comandaPanel.add(etiquetaComboMesa);
         comandaPanel.add(comboMesa);
+        comandaPanel.add(botonborrar);
         comandaPanel.add(buscarComanda);
+        comandaPanel.add(comboProducto);
 
         panelPrincipal.add(comandaPanel);
         panelPrincipal.add(panelTabla);
@@ -85,16 +100,22 @@ public class Window_Comanda extends JFrame {
         return panel;
     }
 
-    private void rellenarComboMesa (JComboBox comboBox){
-        comboBox.addItem("Mesa 1");
-        comboBox.addItem("Mesa 2");
-        comboBox.addItem("Mesa 3");
-        comboBox.addItem("Mesa 4");
-        comboBox.addItem("Mesa 5");
-        comboBox.addItem("Mesa 6");
-        comboBox.addItem("Mesa 7");
-        comboBox.addItem("Mesa 8");
+    private void rellenarComboMesas(JComboBox comboBox){
+        List<Mesa> mesa = MesasBD.obtenerMesapedido();
+        for(Mesa m : mesa){
+            comboBox.addItem(m.getNum_mesa());
+        }
+
     }
+    private void rellenarComboProducto(JComboBox comboBox){
+        List<Producto> producto = Productobd.obtenerProductos();
+        for(Producto p : producto){
+            comboBox.addItem(p.getDescripcion());
+        }
+
+    }
+
+
 
     private static JButton buscarComanda (){
         JButton buscarComanda = new JButton("BUSCAR");
@@ -102,9 +123,47 @@ public class Window_Comanda extends JFrame {
         buscarComanda.setBackground(Color.darkGray);
         Border line = new LineBorder(Color.WHITE);
         buscarComanda.setBorder(line);
+        buscarComanda.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer pedido = Integer.valueOf((String.valueOf(comboMesa.getSelectedItem())));
+                List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
+
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda1.getModel();
+                modelo.setRowCount(0);
+
+                if(pedi != null){
+                    for(ModeloPedido mp: pedi){
+                        modelo = (DefaultTableModel) tablaComanda1.getModel();
+                        modelo.addRow(new Object[]{mp.getProducto(), mp.getCantidad(), mp.getMesa()});
+                    }
+                    tablaComanda1.repaint();
+                }
+
+
+            }
+        });
 
         return buscarComanda;
     }
+    private static JButton borrarProducto (){
+        JButton borrar = new JButton("BORRAR");
+        borrar.setForeground(Color.WHITE);
+        borrar.setBackground(Color.darkGray);
+        Border line = new LineBorder(Color.WHITE);
+        borrar.setBorder(line);
+        borrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ModeloPedido pedido = new ModeloPedido();
+                pedido.setProducto(String.valueOf(comboProducto.getSelectedItem()));
+                pedido.setMesa(Integer.parseInt((String.valueOf(comboMesa.getSelectedItem()))));
+                PedidoBD.eliminarPedidosProducto(pedido);
+            }
+        });
+
+        return borrar;
+    }
+
 
     private static JButton addCantidad (){
         JButton addCantidad = new JButton("+");
