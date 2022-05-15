@@ -8,42 +8,36 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 import static windows.Window.pantalla;
 
 public class Cuenta extends JFrame{
+
+    private static final Font fuente = new Font("Arial", Font.ITALIC | Font.BOLD, 45);
 
     private static final ImageIcon imagenFondo = rutaDeImagen();
     JPanel panelPrincipal = crearPanelImagenFondo();
 
     public Cuenta(){
         // JPANELS
-        JPanel panelCuenta = new JPanel();
-        panelCuenta.setLayout(new GridLayout(1,2));
-        panelCuenta.setBounds(275,160,700,220);
         JPanel panelParaBotonPDF = new JPanel();
-        panelParaBotonPDF.setBounds(520,410,225,180);
+        panelParaBotonPDF.setBounds(300,350,800,180);
         panelParaBotonPDF.setOpaque(false);
+        JLabel mesaLabel = mesaLabel();
+        JComboBox mesas = rellenarComboMesas();
+        mesas.setPreferredSize(new Dimension(250,100));
         JButton pdfCuenta = crearBotonPDF();
         pdfCuenta.setPreferredSize(new Dimension(250,100));
+        panelParaBotonPDF.add(mesaLabel);
+        panelParaBotonPDF.add(mesas);
         panelParaBotonPDF.add(pdfCuenta);
 
 
-        //TABLA COMANDA
-        Object[] columnas = {"Número Mesa",
-                "Pedido Finalizado"};
-        Object[][] datos = {{"","",""}};
-        JTable tablaCuenta = new JTable(datos , columnas);
-
-        //PANEL TABLA COMANDA
-        JScrollPane scrollPane = new JScrollPane(tablaCuenta);
-        tablaCuenta.setFillsViewportHeight(true);
 
         JPanel panelFondo = crearPanelImagenFondo();
 
-        panelCuenta.add(scrollPane);
         panelPrincipal.add(panelParaBotonPDF);
-        panelPrincipal.add(panelCuenta);
         panelPrincipal.add(panelFondo);
 
         // CONFIGURACION WINDOW_COMANDA
@@ -80,6 +74,23 @@ public class Cuenta extends JFrame{
             }
         }); **/
         return generarPDF;
+    }
+
+    private JComboBox rellenarComboMesas(){
+        JComboBox comboBox = new JComboBox<>();
+        List<Mesa> mesa = MesasBD.obtenerMesapedido();
+        for(Mesa m : mesa){
+            comboBox.addItem(m.getNum_mesa());
+        }
+        return comboBox;
+    }
+
+    public static JLabel mesaLabel(){
+        JLabel id = new JLabel();
+        id.setFont(fuente);
+        id.setText("MESA");
+        id.setForeground(Color.WHITE);
+        return id;
     }
 
 }
