@@ -2,22 +2,22 @@ package modelos;
 
 import java.util.Objects;
 
-public class Pedido {
+public class ModeloPedido {
     private int id;
-    private String mesa;
-    private int camarero;
+    private int mesa;
+    private String camarero;
     private String producto;
     private int cantidad;
 
-    public Pedido(int id, String mesa, int camarero, String producto, int cantidad) {
+    public ModeloPedido(int id, int mesa, String camarero, String producto, int cantidad) {
         this.id = id;
         this.mesa = mesa;
         this.camarero = camarero;
         this.producto = producto;
         this.cantidad = cantidad;
     }
-    public Pedido( String mesa) {
-        this.mesa = mesa;
+
+    public ModeloPedido() {
     }
 
     public int getId() {
@@ -28,19 +28,19 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getMesa() {
+    public int getMesa() {
         return mesa;
     }
 
-    public void setMesa(String mesa) {
+    public void setMesa(int mesa) {
         this.mesa = mesa;
     }
 
-    public int getCamarero() {
+    public String getCamarero() {
         return camarero;
     }
 
-    public void setCamarero(int camarero) {
+    public void setCamarero(String camarero) {
         this.camarero = camarero;
     }
 
@@ -64,8 +64,8 @@ public class Pedido {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return id == pedido.id && camarero == pedido.camarero && cantidad == pedido.cantidad && Objects.equals(mesa, pedido.mesa) && Objects.equals(producto, pedido.producto);
+        ModeloPedido that = (ModeloPedido) o;
+        return id == that.id && mesa == that.mesa && cantidad == that.cantidad && Objects.equals(camarero, that.camarero) && Objects.equals(producto, that.producto);
     }
 
     @Override
@@ -75,10 +75,10 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
+        return "ModeloPedido{" +
                 "id=" + id +
-                ", mesa='" + mesa + '\'' +
-                ", camarero=" + camarero +
+                ", mesa=" + mesa +
+                ", camarero='" + camarero + '\'' +
                 ", producto='" + producto + '\'' +
                 ", cantidad=" + cantidad +
                 '}';

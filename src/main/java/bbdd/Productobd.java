@@ -138,16 +138,18 @@ public class Productobd extends Configuracion{
 
         public static void actualizarProducto(Producto producto){
             Connection con = conectarConBD();
-
             try {
                 PreparedStatement update = con.prepareStatement("update producto " +
-                        "set descripcion = ? , tamaño = ?, tipo_producto = ?" +
+                        "set descripcion = ? , tamaño = ?, tipo_producto = ?, pequenya = ?, media = ?, grande = ?" +
                         "where id = ? ");
 
                 update.setString(1,producto.getDescripcion());
                 update.setInt(2, producto.getTamayo());
                 update.setInt(3, producto.getTipoproducto().ordinal());
-                update.setInt(4, producto.getId());
+                update.setDouble(4, producto.getPequenya());
+                update.setDouble(5, producto.getMedia());
+                update.setDouble(6, producto.getGrande());
+                update.setInt(7,producto.getId());
 
 
                 //Ejecución del update

@@ -1,11 +1,15 @@
 package windows.camarero;
+import bbdd.EmpleadoBD;
 import bbdd.MesasBD;
 import bbdd.Productobd;
 import modelos.Mesa;
+import modelos.ModeloEmpleado;
+import modelos.ModeloPedido;
 import modelos.Producto;
-import windows.administrator.Productos;
+import bbdd.PedidoBD;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static windows.Window.pantalla;
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import static windows.Window.pantalla;
 
 public class Pedido extends JFrame{
+
+    private static JComboBox comboMesas;
+    private static JComboBox comboCamarero;
+    private static JComboBox comboProducto;
+    private static JTable tablaComanda;
+    private static List<ModeloPedido> pedi = new ArrayList<>();
+    private static SpinnerModel model;
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
         private static final ImageIcon imagenFondo = rutaDeImagen();
         public Pedido(){
@@ -37,22 +44,24 @@ public class Pedido extends JFrame{
 
             // Combobox mesa
             JLabel etiquetaMesa = mesa();
-            JComboBox comboMesas = new JComboBox();
+            comboMesas = new JComboBox();
             rellenarComboMesas(comboMesas);
             //Combobox Camarero
             JLabel etiquetaCamarero = camarero();
-            JComboBox comboCamarero = new JComboBox();
+            comboCamarero = new JComboBox();
             rellenarComboCamarero(comboCamarero);
             //Combobox Producto
             JLabel etiquetaProducto = producto();
-            JComboBox comboProducto = new JComboBox();
-            rellenarComboCamarero(comboProducto);
+            comboProducto = new JComboBox();
+            rellenarComboProducto(comboProducto);
             //Cantidad
             JLabel etiquetaLabel = cantidad();
-            SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
+            model = new SpinnerNumberModel(1, 1, 100, 1);
             JSpinner numeroProductos = new JSpinner(model);
             //Botón añadir
-            JButton botonAñadir = new JButton("Añadir");
+            JButton botonAñadir = boton_añadir();
+            JButton botonbuscar = boton_buscar();
+            JButton botonborrar = boton_eliminar();
 
             panel.add(etiquetaMesa);
             panel.add(comboMesas);
@@ -63,13 +72,16 @@ public class Pedido extends JFrame{
             panel.add(etiquetaLabel);
             panel.add(numeroProductos);
             panel.add(botonAñadir);
+            panel.add(botonbuscar);
+            panel.add(botonborrar);
 
             //TABLA COMANDA
+
             Object[] columnas = {"Producto",
                     "Cantidad",
-                    "Importe por unidad"};
+                    "Mesa"};
             Object[][] datos = {{"","",""}};
-            JTable tablaComanda = new JTable(datos , columnas);
+            tablaComanda = new JTable(new DefaultTableModel(datos,columnas));
 
             //PANEL TABLA COMANDA
             JScrollPane scrollPane = new JScrollPane(tablaComanda);
@@ -82,7 +94,63 @@ public class Pedido extends JFrame{
 
             window.setVisible(true);
         }
+    private static JButton  boton_añadir() {
+        JButton boton = new JButton("Añadir");
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ModeloPedido ped = new ModeloPedido();
+                ped.setMesa(Integer.parseInt((String.valueOf(comboMesas.getSelectedItem()))));
+                ped.setCamarero(String.valueOf(comboCamarero.getSelectedItem()));
+                ped.setProducto(String.valueOf(comboProducto.getSelectedItem()));
+                ped.setCantidad(Integer.parseInt(String.valueOf(model.getValue())));
+                PedidoBD.crearPedido(ped);
+            }
 
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
+    private static JButton boton_eliminar() {
+        JButton boton = new JButton("Borrar");
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ModeloPedido pedido = new ModeloPedido();
+                pedido.setMesa(Integer.parseInt(String.valueOf(comboMesas.getSelectedItem())));
+                PedidoBD.eliminarPedidos(pedido);
+            }
+        });
+        return boton;
+    }
+
+    private static JButton boton_buscar() {
+        JButton boton = new JButton("Buscar");
+        boton.setFocusPainted(false);
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer pedido = Integer.valueOf((String.valueOf(comboMesas.getSelectedItem())));
+                List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
+                int i = 1;
+                int columna = 1;
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
+                modelo.setRowCount(0);
+
+                if(pedi != null){
+                    for(ModeloPedido mp: pedi){
+                        modelo = (DefaultTableModel) tablaComanda.getModel();
+                        modelo.addRow(new Object[]{mp.getProducto(), mp.getCantidad(), mp.getMesa()});
+                }
+                tablaComanda.repaint();
+            }
+
+
+            }
+        });
+        // boton.addActionListener(new AccionAbrirMenuCocinero());
+        return boton;
+    }
     private static ImageIcon rutaDeImagen(){
         String ruta = new File("").getAbsolutePath() + "\\imagenes\\pedido.jpg";
         ImageIcon imagenMesa = new ImageIcon(ruta);
@@ -102,7 +170,7 @@ public class Pedido extends JFrame{
     }
     private static JPanel pane() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 0, 5,5));
+        panel.setLayout(new GridLayout(6, 0, 5,5));
         panel.setBounds(50, 50, 600, 300);
         return panel;
     }
@@ -117,6 +185,7 @@ public class Pedido extends JFrame{
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
         for(Mesa m : mesa){
             comboBox.addItem(m.getNum_mesa());
+
         }
 
     }
@@ -128,8 +197,10 @@ public class Pedido extends JFrame{
 
     }
     private void rellenarComboCamarero(JComboBox comboBox){
-
-        comboBox.addItem("Camarero 2");
+        List<ModeloEmpleado> empleado = EmpleadoBD.obtenerEmpleadopedido();
+        for(ModeloEmpleado m : empleado){
+            comboBox.addItem(m.getNombre());
+        }
     }
     public static JLabel mesa(){
         JLabel nombre = new JLabel();
