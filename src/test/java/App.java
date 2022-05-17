@@ -10,7 +10,7 @@ public class App {
 
         new Window();
 
-        // CuentaPDF cuenta = CuentaBD.generarObjetoCuenta(1);
-        // UtilidadesPDF.GenerarCuentaPDF(cuenta);
+        //CuentaPDF cuenta = CuentaBD.generarObjetoCuenta(1);
+        //UtilidadesPDF.GenerarCuentaPDF(cuenta);
     }
 }

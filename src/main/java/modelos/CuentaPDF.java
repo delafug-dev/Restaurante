@@ -17,8 +17,8 @@ public class CuentaPDF {
         this.totalCuenta = totalCuenta;
     }
 
-
     public CuentaPDF() {
+
     }
 
     public String getNum_mesa() {
@@ -57,8 +57,8 @@ public class CuentaPDF {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CuentaPDF cuenta = (CuentaPDF) o;
-        return Objects.equals(num_mesa, cuenta.num_mesa) && Objects.equals(nombre_camarero, cuenta.nombre_camarero) && Objects.equals(totalesComandas, cuenta.totalesComandas) && Objects.equals(totalCuenta, cuenta.totalCuenta);
+        CuentaPDF cuentaPDF = (CuentaPDF) o;
+        return num_mesa == cuentaPDF.num_mesa && Objects.equals(nombre_camarero, cuentaPDF.nombre_camarero) && Objects.equals(totalesComandas, cuentaPDF.totalesComandas) && Objects.equals(totalCuenta, cuentaPDF.totalCuenta);
     }
 
     @Override
@@ -68,12 +68,11 @@ public class CuentaPDF {
 
     @Override
     public String toString() {
-        return "Cuenta{" +
-                "num_mesa='" + num_mesa + '\'' +
+        return "CuentaPDF{" +
+                "num_mesa=" + num_mesa +
                 ", nombre_camarero='" + nombre_camarero + '\'' +
                 ", totalesComandas=" + totalesComandas +
                 ", totalCuenta=" + totalCuenta +
                 '}';
     }
-
 }

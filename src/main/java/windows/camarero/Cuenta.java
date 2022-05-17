@@ -1,7 +1,11 @@
 package windows.camarero;
 
+import bbdd.CuentaBD;
 import bbdd.MesasBD;
+import modelos.CuentaPDF;
 import modelos.Mesa;
+import modelos.ModeloPedido;
+import utilidades.UtilidadesPDF;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +17,7 @@ import java.util.List;
 import static windows.Window.pantalla;
 
 public class Cuenta extends JFrame{
-
+    private static JComboBox mesas;
     private static final Font fuente = new Font("Arial", Font.ITALIC | Font.BOLD, 45);
 
     private static final ImageIcon imagenFondo = rutaDeImagen();
@@ -25,7 +29,7 @@ public class Cuenta extends JFrame{
         panelParaBotonPDF.setBounds(300,350,800,180);
         panelParaBotonPDF.setOpaque(false);
         JLabel mesaLabel = mesaLabel();
-        JComboBox mesas = rellenarComboMesas();
+        mesas = rellenarComboMesas();
         mesas.setPreferredSize(new Dimension(250,100));
         JButton pdfCuenta = crearBotonPDF();
         pdfCuenta.setPreferredSize(new Dimension(250,100));
@@ -68,11 +72,15 @@ public class Cuenta extends JFrame{
 
     private static JButton crearBotonPDF (){
         JButton generarPDF = new JButton("CUENTA TOTAL");
-        /** generarPDF.addActionListener(new ActionListener() {
+        generarPDF.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Mesa idmesa = MesasBD.obtenerPorId((Integer) mesas.getSelectedItem());
+                Integer id = idmesa.getId();
+                CuentaPDF cuenta = CuentaBD.generarObjetoCuenta(id);
+                UtilidadesPDF.GenerarCuentaPDF(cuenta);
 
             }
-        }); **/
+        });
         return generarPDF;
     }
 
