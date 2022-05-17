@@ -100,9 +100,9 @@ public class Pedido extends JFrame{
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModeloPedido ped = new ModeloPedido();
-                ped.setMesa(Integer.parseInt((String.valueOf(comboMesas.getSelectedItem()))));
-                ped.setCamarero(String.valueOf(comboCamarero.getSelectedItem()));
-                ped.setProducto(String.valueOf(comboProducto.getSelectedItem()));
+                ped.setMesa((Mesa) comboMesas.getSelectedItem());
+                ped.setCamarero((ModeloEmpleado) comboCamarero.getSelectedItem());
+                ped.setProducto((Producto) comboProducto.getSelectedItem());
                 ped.setCantidad(Integer.parseInt(String.valueOf(model.getValue())));
                 PedidoBD.crearPedido(ped);
             }
@@ -117,7 +117,7 @@ public class Pedido extends JFrame{
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModeloPedido pedido = new ModeloPedido();
-                pedido.setMesa(Integer.parseInt(String.valueOf(comboMesas.getSelectedItem())));
+                pedido.setMesa((Mesa) comboMesas.getSelectedItem());
                 PedidoBD.eliminarPedidos(pedido);
             }
         });
@@ -129,7 +129,7 @@ public class Pedido extends JFrame{
         boton.setFocusPainted(false);
         boton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Integer pedido = Integer.valueOf((String.valueOf(comboMesas.getSelectedItem())));
+                Mesa pedido = (Mesa) comboMesas.getSelectedItem();
                 List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
                 int i = 1;
                 int columna = 1;
@@ -184,7 +184,7 @@ public class Pedido extends JFrame{
     private void rellenarComboMesas(JComboBox comboBox){
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
         for(Mesa m : mesa){
-            comboBox.addItem(m.getNum_mesa());
+            comboBox.addItem(m);
 
         }
 
@@ -192,14 +192,14 @@ public class Pedido extends JFrame{
     private void rellenarComboProducto(JComboBox comboBox){
         List<Producto> producto = Productobd.obtenerProductopedido();
         for(Producto p : producto){
-            comboBox.addItem(p.getDescripcion());
+            comboBox.addItem(p);
         }
 
     }
     private void rellenarComboCamarero(JComboBox comboBox){
         List<ModeloEmpleado> empleado = EmpleadoBD.obtenerEmpleadopedido();
         for(ModeloEmpleado m : empleado){
-            comboBox.addItem(m.getNombre());
+            comboBox.addItem(m);
         }
     }
     public static JLabel mesa(){

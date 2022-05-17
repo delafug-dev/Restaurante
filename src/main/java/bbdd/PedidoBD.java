@@ -1,6 +1,7 @@
 package bbdd;
 
 import modelos.Mesa;
+import modelos.ModeloEmpleado;
 import modelos.ModeloPedido;
 import modelos.Producto;
 import windows.camarero.Pedido;
@@ -32,14 +33,13 @@ public class PedidoBD extends Configuracion{
         Connection con = conectarConBD();
 
         try {
-            PreparedStatement insert = con.prepareStatement("insert into pedido (id, mesa,camarero, producto, cantidad)" +
-                    "values(?,?,?, ?,?)");
+            PreparedStatement insert = con.prepareStatement("insert into pedido ( id_mesa, id_camarero, id_producto, cantidad)" +
+                    "values(?,?, ?,?)");
 
-            insert.setInt(1, pedido.getId());
-            insert.setInt(2, pedido.getMesa());
-            insert.setString(3, pedido.getCamarero());
-            insert.setString(4, pedido.getProducto());
-            insert.setInt(5, pedido.getCantidad());
+            insert.setInt(1, pedido.getMesa().getId());
+            insert.setInt(2, pedido.getCamarero().getId());
+            insert.setInt(3, pedido.getProducto().getId());
+            insert.setInt(4, pedido.getCantidad());
 
 
             //Ejecución del insert
@@ -54,20 +54,24 @@ public class PedidoBD extends Configuracion{
             cerrarConexion(con);
         }
     }
-    public static List<ModeloPedido> obtenerPormesa(Integer mesa) {
+    public static List<ModeloPedido> obtenerPormesa(Mesa mesa) {
 
         Connection con = conectarConBD();
         ModeloPedido num_mesa = null;
         List<ModeloPedido> lista_mesa = new ArrayList<>();
 
         try {
-            PreparedStatement query = con.prepareStatement("SELECT * FROM pedido where mesa = ?  ");
-            query.setInt(1, mesa);
+            PreparedStatement query = con.prepareStatement("SELECT * FROM pedido where id_mesa = ?  ");
+            query.setInt(1, mesa.getId());
             ResultSet rs = query.executeQuery();
 
             //Recorremos los datos
             while (rs.next()) {
-                num_mesa = new ModeloPedido(rs.getInt("id"), rs.getInt("mesa"), rs.getString("camarero"), rs.getString("producto"), rs.getInt("cantidad"));
+                Mesa m = MesasBD.obtenerPorId(rs.getInt("id_mesa"));
+                ModeloEmpleado em =  EmpleadoBD.obtenerPorId(rs.getInt("id_camarero"));
+                Producto p = Productobd.obtenerPorId(rs.getInt("id_producto"));
+                num_mesa = new ModeloPedido( m ,em,p , rs.getInt("cantidad"));
+
                 lista_mesa.add(num_mesa);
             }
 
@@ -86,9 +90,9 @@ public class PedidoBD extends Configuracion{
         Connection con = conectarConBD();
 
         try {
-            PreparedStatement delete = con.prepareStatement("delete from pedido where mesa = ? ");
+            PreparedStatement delete = con.prepareStatement("delete from pedido where id_mesa = ? ");
 
-            delete.setInt(1, mesa.getMesa());
+            delete.setInt(1, mesa.getMesa().getId());
 
             //Ejecución del delete
             delete.executeUpdate();
@@ -106,10 +110,10 @@ public class PedidoBD extends Configuracion{
         Connection con = conectarConBD();
 
         try {
-            PreparedStatement delete = con.prepareStatement("delete from pedido where producto = ? and mesa = ?");
+            PreparedStatement delete = con.prepareStatement("delete from pedido where id_producto = ? and id_mesa = ?");
 
-            delete.setString(1, producto.getProducto());
-            delete.setInt(2, producto.getMesa());
+            delete.setInt(1, producto.getProducto().getId());
+            delete.setInt(2, producto.getMesa().getId());
 
             //Ejecución del delete
             delete.executeUpdate();
@@ -127,14 +131,13 @@ public class PedidoBD extends Configuracion{
         Connection con = conectarConBD();
         try {
             PreparedStatement update = con.prepareStatement("update pedido " +
-                    "set id = ? , camarero = ?, cantidad = ?" +
-                    "where mesa = ? and producto = ?");
+                    "set  id_camarero = ?, cantidad = ?" +
+                    "where id_mesa = ? and id_producto = ?");
 
-            update.setInt(1, productoMesa.getId());
-            update.setString(2, productoMesa.getCamarero());
-            update.setInt(3, productoMesa.getCantidad());
-            update.setInt(4, productoMesa.getMesa());
-            update.setString(5, productoMesa.getProducto());
+            update.setInt(1, productoMesa.getCamarero().getId());
+            update.setInt(2, productoMesa.getCantidad());
+            update.setInt(3, productoMesa.getMesa().getId());
+            update.setInt(4, productoMesa.getProducto().getId());
 
 
             //Ejecución del update

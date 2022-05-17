@@ -4,13 +4,12 @@ import java.util.Objects;
 
 public class ModeloPedido {
     private int id;
-    private int mesa;
-    private String camarero;
-    private String producto;
+    private Mesa mesa;
+    private ModeloEmpleado camarero;
+    private Producto producto;
     private int cantidad;
 
-    public ModeloPedido(int id, int mesa, String camarero, String producto, int cantidad) {
-        this.id = id;
+    public ModeloPedido( Mesa mesa, ModeloEmpleado camarero, Producto producto, int cantidad) {
         this.mesa = mesa;
         this.camarero = camarero;
         this.producto = producto;
@@ -28,27 +27,27 @@ public class ModeloPedido {
         this.id = id;
     }
 
-    public int getMesa() {
+    public Mesa getMesa() {
         return mesa;
     }
 
-    public void setMesa(int mesa) {
+    public void setMesa(Mesa mesa) {
         this.mesa = mesa;
     }
 
-    public String getCamarero() {
+    public ModeloEmpleado getCamarero() {
         return camarero;
     }
 
-    public void setCamarero(String camarero) {
+    public void setCamarero(ModeloEmpleado camarero) {
         this.camarero = camarero;
     }
 
-    public String getProducto() {
+    public Producto getProducto() {
         return producto;
     }
 
-    public void setProducto(String producto) {
+    public void setProducto(Producto producto) {
         this.producto = producto;
     }
 
@@ -61,25 +60,12 @@ public class ModeloPedido {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ModeloPedido that = (ModeloPedido) o;
-        return id == that.id && mesa == that.mesa && cantidad == that.cantidad && Objects.equals(camarero, that.camarero) && Objects.equals(producto, that.producto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, mesa, camarero, producto, cantidad);
-    }
-
-    @Override
     public String toString() {
         return "ModeloPedido{" +
                 "id=" + id +
                 ", mesa=" + mesa +
-                ", camarero='" + camarero + '\'' +
-                ", producto='" + producto + '\'' +
+                ", camarero=" + camarero +
+                ", producto=" + producto +
                 ", cantidad=" + cantidad +
                 '}';
     }
