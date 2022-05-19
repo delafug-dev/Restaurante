@@ -63,12 +63,9 @@ public class Aforo extends JFrame{
         panelCombobox.add(comboMesa);
 
 
-
-
         SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
         JSpinner numeroProductos = new JSpinner(model);
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
-
 
         //TABLA COMANDA
         Object[] columnas = {"Nº Mesa",
@@ -163,12 +160,10 @@ public class Aforo extends JFrame{
     }
     private void rellenarComboProducto(JComboBox comboBox){
 
-        comboBox.addItem("Si");
-        comboBox.addItem("No");
+        comboBox.addItem("Libre");
+        comboBox.addItem("Ocupada");
 
     }
-
-
 
 }
 

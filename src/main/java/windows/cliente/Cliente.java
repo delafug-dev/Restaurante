@@ -31,7 +31,6 @@ public class Cliente extends JFrame{
             panelpestana.setLayout(new BorderLayout());
             JPanel panelProductos = new JPanel(new GridLayout(0, 4));
             panelProductos.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 300));
-            panelProductos.setOpaque(false);
             JLabel producto = new JLabel("Producto");
             JLabel pequeyo = new JLabel("Pequeño");
             JLabel mediano = new JLabel("Mediano");
@@ -64,7 +63,7 @@ public class Cliente extends JFrame{
 
         }
         panelPrincipal.add(pestayas);
-        panelPrincipal.setOpaque(false);
+        // panelPrincipal.setOpaque(false);
 
         // CONFIGURACION CARTA
         setResizable(false);

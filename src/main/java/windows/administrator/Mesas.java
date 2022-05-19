@@ -149,7 +149,7 @@ public class Mesas extends JFrame {
     public static JLabel num_comensales(){
         JLabel num_comensales = new JLabel();
         num_comensales.setFont(fuente);
-        num_comensales.setText("Libre");
+        num_comensales.setText("Estado");
 
         num_comensales.setForeground(Color.WHITE);
         return num_comensales;

@@ -147,7 +147,7 @@ public class Window_Comanda extends JFrame {
         return buscarComanda;
     }
     private static JButton borrarProducto (){
-        JButton borrar = new JButton("BORRAR");
+        JButton borrar = new JButton("SERVIDO");
         borrar.setForeground(Color.WHITE);
         borrar.setBackground(Color.darkGray);
         Border line = new LineBorder(Color.WHITE);

@@ -1,5 +1,5 @@
 package modelos;
 
 public enum Libre {
-    Si, No
+    Libre, Ocupada
 }
