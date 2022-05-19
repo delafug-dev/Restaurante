@@ -21,6 +21,7 @@ public class Cliente extends JFrame{
 
         // Panel por pestañas
         JTabbedPane pestayas = new JTabbedPane();
+        pestayas.setOpaque(false);
 
         //Obtenemos los productos
         List<Producto> listaProductos = Productobd.obtenerProductos();
@@ -28,10 +29,11 @@ public class Cliente extends JFrame{
 
         for (Tipoproducto tipoProducto : productosPorTipo.keySet()) {
             JPanel panelpestana = new JPanel();
+
+            panelpestana = crearPanelImagenFondo();
             panelpestana.setLayout(new BorderLayout());
             JPanel panelProductos = new JPanel(new GridLayout(0, 4));
             panelProductos.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 300));
-            panelProductos.setOpaque(false);
             JLabel producto = new JLabel("Producto");
             JLabel pequeyo = new JLabel("Pequeño");
             JLabel mediano = new JLabel("Mediano");
@@ -59,12 +61,14 @@ public class Cliente extends JFrame{
                 panelProductos.add(precioMedia);
                 panelProductos.add(precioGrande);
             }
-            panelpestana.add(panelProductos,BorderLayout.CENTER);
-            pestayas.add(tipoProducto.toString(),panelpestana);
 
+            panelProductos.setOpaque(false);
+            panelpestana.add(panelProductos,BorderLayout.CENTER);
+            panelpestana.setOpaque(false);
+            pestayas.add(tipoProducto.toString(),panelpestana);
         }
         panelPrincipal.add(pestayas);
-        panelPrincipal.setOpaque(false);
+        panelPrincipal.setOpaque(true);
 
         // CONFIGURACION CARTA
         setResizable(false);

@@ -47,7 +47,7 @@ public class Aforo extends JFrame{
         botonAñadir.setPreferredSize(new Dimension(150,50));
         botonBuscar.setPreferredSize(new Dimension(150,50));
         panelBoton.add(botonAñadir);
-        panelBoton.add(botonBuscar);
+        //panelBoton.add(botonBuscar);
 
         //Panel Combobox
         JPanel panelCombobox = new JPanel();
@@ -115,13 +115,26 @@ public class Aforo extends JFrame{
     }
 
     JButton aforoMesaOcupada (){
-        JButton mesaOcupada = new JButton("Añadir Mesa");
+        JButton mesaOcupada = new JButton("Buscar");
         mesaOcupada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Mesa mesa = new Mesa();
                 mesa.setNum_mesa((Integer) comboMesa.getSelectedItem());
                 mesa.setLibre(Libre.valueOf((String) comboLibre.getSelectedItem()));
                 MesasBD.actualizarMesa(mesa);
+                List<Mesa> mesa1 = MesasBD.obtenerProductos();
+
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
+                modelo.setRowCount(0);
+
+                if(mesa1 != null){
+                    for(Mesa m: mesa1){
+                        modelo = (DefaultTableModel) tablaComanda.getModel();
+                        modelo.addRow(new Object[]{m.getNum_mesa(), m.getLibre()});
+                    }
+                    tablaComanda.repaint();
+                }
             }
 
         });

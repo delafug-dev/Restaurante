@@ -41,7 +41,8 @@ public class CuentaBD {
                 TotalesComanda t = new TotalesComanda();
                 t.setNombre_producto(rs.getString("descripcion"));
                 t.setCantidad_pedida(rs.getInt("cantidad"));
-                t.setPrecio_total(rs.getDouble("pequenya"));
+                t.setPrecio(rs.getDouble("pequenya"));
+                t.setPrecio_total(rs.getDouble("pequenyatotal"));
                 totalesComanda.add(t);
             }
 

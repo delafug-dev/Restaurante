@@ -61,7 +61,7 @@ public class PedidoBD extends Configuracion{
         List<ModeloPedido> lista_mesa = new ArrayList<>();
 
         try {
-            PreparedStatement query = con.prepareStatement("SELECT * FROM pedido where id_mesa = ?  ");
+            PreparedStatement query = con.prepareStatement("SELECT * FROM pedido_camarero where id_mesa = ?  ");
             query.setInt(1, mesa.getId());
             ResultSet rs = query.executeQuery();
 
