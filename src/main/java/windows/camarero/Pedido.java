@@ -105,6 +105,20 @@ public class Pedido extends JFrame{
                 ped.setProducto((Producto) comboProducto.getSelectedItem());
                 ped.setCantidad(Integer.parseInt(String.valueOf(model.getValue())));
                 PedidoBD.crearPedido(ped);
+                Mesa pedido = (Mesa) comboMesas.getSelectedItem();
+                List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
+
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
+                modelo.setRowCount(0);
+
+                if(pedi != null){
+                    for(ModeloPedido mp: pedi){
+                        modelo = (DefaultTableModel) tablaComanda.getModel();
+                        modelo.addRow(new Object[]{mp.getProducto(), mp.getCantidad(), mp.getMesa()});
+                    }
+                    tablaComanda.repaint();
+                }
             }
 
         });
@@ -131,8 +145,7 @@ public class Pedido extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Mesa pedido = (Mesa) comboMesas.getSelectedItem();
                 List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
-                int i = 1;
-                int columna = 1;
+
 
                 DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
                 modelo.setRowCount(0);
