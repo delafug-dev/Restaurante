@@ -2,8 +2,6 @@ package windows;
 
 import windows.camarero.Camarero;
 import windows.cliente.Cliente;
-import windows.camarero.Cuenta;
-import windows.cliente.Cliente;
 import windows.cocinero.Window_Cocinero;
 import windows.administrator.Window_Administrator;
 

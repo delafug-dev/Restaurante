@@ -1,91 +1,56 @@
 package windows.cliente;
 
-import bbdd.Productobd;
-import modelos.Producto;
-import modelos.Tipoproducto;
+import windows.administrator.Empleado;
+import windows.administrator.Productos;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import static windows.Window.pantalla;
 
-public class Cliente extends JFrame{
+public class Cliente  extends JFrame {
+    public static final Dimension pantalla = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85));
+
+
+
 
     private static final ImageIcon imagenFondo = rutaDeImagen();
-    JPanel panelPrincipal = crearPanelImagenFondo();
 
-    public  Cliente() {
+    public Cliente() {
 
-        // Panel por pestañas
-        JTabbedPane pestayas = new JTabbedPane();
-        pestayas.setOpaque(false);
+        JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-        //Obtenemos los productos
-        List<Producto> listaProductos = Productobd.obtenerProductos();
-        Map<Tipoproducto, List<Producto>> productosPorTipo = listaProductos.stream().collect(Collectors.groupingBy(Producto::getTipoproducto));
+        // window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
+        window.setSize(pantalla); // indica tamaño de la ventana
 
-        for (Tipoproducto tipoProducto : productosPorTipo.keySet()) {
-            JPanel panelpestana = new JPanel();
+        JPanel panel = pane();
+        JPanel panel2 = pane2();
+        JPanel fondo = crearPanelImagenFondo();
 
-            panelpestana = crearPanelImagenFondo();
-            panelpestana.setLayout(new BorderLayout());
-            JPanel panelProductos = new JPanel(new GridLayout(0, 4));
-            panelProductos.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 300));
-            JLabel producto = new JLabel("Producto");
-            JLabel pequeyo = new JLabel("Pequeño");
-            JLabel mediano = new JLabel("Mediano");
-            JLabel grande = new JLabel("Grande");
-            panelProductos.add(producto);
-            panelProductos.add(pequeyo);
-            panelProductos.add(mediano);
-            panelProductos.add(grande);
+        JButton boton_carta, boton_reserva;
+        boton_carta = crearBotonCarta();
+        boton_reserva = crearBotonReserva();
+        panel.add(boton_carta);
+        panel2.add(boton_reserva);
+        window.add(panel);
+        window.add(panel2);
+        window.add(fondo);
 
-            for (Producto p : productosPorTipo.get(tipoProducto)) {
-                JLabel nombreProducto = new JLabel(p.getDescripcion());
-                nombreProducto.setForeground(Color.BLACK);
-                nombreProducto.setFont(new Font("Comic Sans", Font.PLAIN, 24));
-                JLabel precioPequenya = new JLabel(p.getPequenya() + "€");
-                JLabel precioMedia = new JLabel(p.getMedia() + "€");
-                JLabel precioGrande = new JLabel(p.getGrande() + "€");
-                precioPequenya.setForeground(Color.BLACK);
-                precioPequenya.setFont(new Font("Comic Sans", Font.PLAIN, 24));
-                precioMedia.setForeground(Color.BLACK);
-                precioMedia.setFont(new Font("Comic Sans", Font.PLAIN, 24));
-                precioGrande.setForeground(Color.BLACK);
-                precioGrande.setFont(new Font("Comic Sans", Font.PLAIN, 24));
-                panelProductos.add(nombreProducto);
-                panelProductos.add(precioPequenya);
-                panelProductos.add(precioMedia);
-                panelProductos.add(precioGrande);
-            }
-
-            panelProductos.setOpaque(false);
-            panelpestana.add(panelProductos,BorderLayout.CENTER);
-            panelpestana.setOpaque(false);
-            pestayas.add(tipoProducto.toString(),panelpestana);
-        }
-        panelPrincipal.add(pestayas);
-        panelPrincipal.setOpaque(true);
-
-        // CONFIGURACION CARTA
-        setResizable(false);
-        setContentPane(panelPrincipal);
-        setSize(pantalla);
-        setVisible(true);
+        window.setVisible(true);
     }
-    private static ImageIcon rutaDeImagen () {
-        String ruta = new File("").getAbsolutePath() + "\\imagenes\\fondoCarta.jpg";
-        ImageIcon imagenCarta = new ImageIcon(ruta);
-        Image cambiar_tamayo = imagenCarta.getImage()
+
+    private static ImageIcon rutaDeImagen() {
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\fondocliente.jpg";
+        ImageIcon imagenMesa = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenMesa.getImage()
                 .getScaledInstance(1400, pantalla.height, Image.SCALE_SMOOTH);
-        imagenCarta.setImage(cambiar_tamayo);
-        return imagenCarta;
+        imagenMesa.setImage(cambiar_tamayo);
+        return imagenMesa;
     }
 
-    public static JPanel crearPanelImagenFondo () {
+    private static JPanel crearPanelImagenFondo() {
         JPanel panel = new JPanel(new BorderLayout()) {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -94,4 +59,62 @@ public class Cliente extends JFrame{
         };
         return panel;
     }
+
+    private static JPanel pane() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 320, 400, 100);
+        return panel;
+    }
+
+    private static JPanel pane2() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 200, 400, 100);
+        return panel;
+    }
+
+    private static JButton crearBotonCarta() {
+
+        JButton boton = new JButton("Carta");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\carta.png";
+        ImageIcon imagenCarta = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenCarta.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenCarta.setImage(cambiar_tamayo);
+        boton.setIcon(imagenCarta);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new accionCarta());
+        return boton;
+    }
+
+    private static JButton crearBotonReserva() {
+
+        JButton boton = new JButton("Reservar");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\reserva.png";
+        ImageIcon imagenReserva = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenReserva.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenReserva.setImage(cambiar_tamayo);
+        boton.setIcon(imagenReserva);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new accionReserva());
+        return boton;
+    }
+
+    static class accionCarta implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new Carta();
+        }
+    }
+
+
+    static class accionReserva implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+
+            new VentanaReserva();
+        }
+
+    }
 }
+

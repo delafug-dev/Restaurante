@@ -1,12 +1,9 @@
 package windows.camarero;
-import bbdd.EmpleadoBD;
-import bbdd.MesasBD;
-import bbdd.Productobd;
+import bbdd.*;
 import modelos.Mesa;
 import modelos.ModeloEmpleado;
 import modelos.ModeloPedido;
 import modelos.Producto;
-import bbdd.PedidoBD;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +22,6 @@ public class Pedido extends JFrame{
     private static JComboBox comboCamarero;
     private static JComboBox comboProducto;
     private static JTable tablaComanda;
-    private static List<ModeloPedido> pedi = new ArrayList<>();
     private static SpinnerModel model;
         static Font fuente=new Font("Arial", Font.ITALIC, 30);
         private static final ImageIcon imagenFondo = rutaDeImagen();
@@ -33,7 +29,6 @@ public class Pedido extends JFrame{
 
             JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-            // window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
             window.setSize(pantalla); // indica tamaño de la ventana
 
             JPanel panel = pane();

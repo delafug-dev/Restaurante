@@ -4,7 +4,6 @@ import modelos.Mesa;
 import modelos.ModeloEmpleado;
 import modelos.ModeloPedido;
 import modelos.Producto;
-import windows.camarero.Pedido;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static bbdd.Configuracion.cerrarConexion;
-import static bbdd.Configuracion.conectarConBD;
 
 public class PedidoBD extends Configuracion{
     public static void crearActualizarPedido(ModeloPedido p) {

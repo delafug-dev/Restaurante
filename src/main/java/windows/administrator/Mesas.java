@@ -1,11 +1,8 @@
 package windows.administrator;
 
 import bbdd.MesasBD;
-import bbdd.Productobd;
 import modelos.Libre;
 import modelos.Mesa;
-import modelos.Producto;
-import modelos.Tipoproducto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

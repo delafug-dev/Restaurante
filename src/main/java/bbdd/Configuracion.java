@@ -10,7 +10,7 @@ public class Configuracion {
         //private static final String password = "daw2122";
         private static final String url = "jdbc:mariadb://localhost/resta";
         private static final String usuario = "root";
-        private static final String password = "77046754";
+        private static final String password = "root";
 
         static Connection conectarConBD() {
             Connection conexion;

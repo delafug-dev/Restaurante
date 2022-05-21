@@ -1,9 +1,6 @@
 package windows.camarero;
 
-import bbdd.EmpleadoBD;
 import bbdd.MesasBD;
-import bbdd.PedidoBD;
-import bbdd.Productobd;
 import modelos.*;
 
 import javax.swing.*;
@@ -12,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import static windows.Window.pantalla;
@@ -31,7 +27,6 @@ public class Aforo extends JFrame{
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
         window.setSize(pantalla); // indica tamaño de la ventana
 
         JPanel panel2 = pane2();

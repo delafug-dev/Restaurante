@@ -1,10 +1,7 @@
 package windows.administrator;
 
 import bbdd.EmpleadoBD;
-import bbdd.Productobd;
 import modelos.ModeloEmpleado;
-import modelos.Producto;
-import modelos.Tipoproducto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +24,6 @@ public class Empleado extends JFrame{
 
         public Empleado() {
 
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
              // indica tamaño de la ventana
 
             window.setSize(pantalla); // indica tamaño de la ventana
