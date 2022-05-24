@@ -1,5 +1,6 @@
 package windows.camarero;
 
+import modelos.Reserva;
 import windows.administrator.Empleado;
 import windows.administrator.Productos;
 
@@ -28,18 +29,22 @@ public class Camarero  extends JFrame {
         JPanel panel = pane();
         JPanel panel2 = pane2();
         JPanel panel12 = pane3();
+        JPanel panel122 = pane4();
         JPanel fondo = crearPanelImagenFondo();
 
-        JButton boton_empleado, boton_productos, boton_mesas;
+        JButton boton_empleado, boton_productos, boton_mesas, boton_reserva;
         boton_empleado = crearBotonAforo();
         boton_productos = crearBotonPedidos();
         boton_mesas = crearBotonCuenta();
+        boton_reserva = crearBotonReserva();
         panel.add(boton_empleado);
         panel2.add(boton_productos);
         panel12.add(boton_mesas);
+        panel122.add(boton_reserva);
         window.add(panel);
         window.add(panel2);
         window.add(panel12);
+        window.add(panel122);
         window.add(fondo);
 
         window.setVisible(true);
@@ -64,24 +69,31 @@ public class Camarero  extends JFrame {
         return panel;
     }
 
-    private static JPanel pane() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 0));
-        panel.setBounds(100, 320, 400, 100);
-        return panel;
-    }
-
     private static JPanel pane2() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0));
-        panel.setBounds(100, 200, 400, 100);
+        panel.setBounds(100, 160, 400, 100);
+        return panel;
+    }
+
+    private static JPanel pane() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 280, 400, 100);
         return panel;
     }
 
     private static JPanel pane3() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 0));
-        panel.setBounds(100, 440, 400, 100);
+        panel.setBounds(100, 400, 400, 100);
+        return panel;
+    }
+
+    private static JPanel pane4() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0));
+        panel.setBounds(100, 520, 400, 100);
         return panel;
     }
 
@@ -133,6 +145,20 @@ public class Camarero  extends JFrame {
         return boton;
     }
 
+    private static JButton crearBotonReserva() {
+
+        JButton boton = new JButton("Reservas");
+        String ruta = new File("").getAbsolutePath() + "\\imagenes\\reserva.png";
+        ImageIcon imagenReserva = new ImageIcon(ruta);
+        Image cambiar_tamayo = imagenReserva.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        imagenReserva.setImage(cambiar_tamayo);
+        boton.setIcon(imagenReserva);
+
+        boton.setFocusPainted(false);
+        boton.addActionListener(new accionReserva());
+        return boton;
+    }
+
     static class accionCuenta implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
             new Cuenta();
@@ -151,6 +177,12 @@ public class Camarero  extends JFrame {
                 new Pedido();
             }
 
+        }
+    }
+
+    static class accionReserva implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            new AdministradorReservas();
         }
     }
 }

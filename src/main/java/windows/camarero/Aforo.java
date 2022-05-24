@@ -1,9 +1,6 @@
 package windows.camarero;
 
-import bbdd.EmpleadoBD;
 import bbdd.MesasBD;
-import bbdd.PedidoBD;
-import bbdd.Productobd;
 import modelos.*;
 
 import javax.swing.*;
@@ -12,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import static windows.Window.pantalla;
@@ -31,7 +27,6 @@ public class Aforo extends JFrame{
 
         JFrame window = new JFrame("Restaurante Paco");// creando instancia FJframe
 
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Sirve para cuando se cierre la ventana se finalice el programa
         window.setSize(pantalla); // indica tamaño de la ventana
 
         JPanel panel2 = pane2();
@@ -47,7 +42,7 @@ public class Aforo extends JFrame{
         botonAñadir.setPreferredSize(new Dimension(150,50));
         botonBuscar.setPreferredSize(new Dimension(150,50));
         panelBoton.add(botonAñadir);
-        panelBoton.add(botonBuscar);
+        //panelBoton.add(botonBuscar);
 
         //Panel Combobox
         JPanel panelCombobox = new JPanel();
@@ -63,12 +58,9 @@ public class Aforo extends JFrame{
         panelCombobox.add(comboMesa);
 
 
-
-
         SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
         JSpinner numeroProductos = new JSpinner(model);
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
-
 
         //TABLA COMANDA
         Object[] columnas = {"Nº Mesa",
@@ -115,13 +107,26 @@ public class Aforo extends JFrame{
     }
 
     JButton aforoMesaOcupada (){
-        JButton mesaOcupada = new JButton("Añadir Mesa");
+        JButton mesaOcupada = new JButton("Buscar");
         mesaOcupada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Mesa mesa = new Mesa();
                 mesa.setNum_mesa((Integer) comboMesa.getSelectedItem());
                 mesa.setLibre(Libre.valueOf((String) comboLibre.getSelectedItem()));
                 MesasBD.actualizarMesa(mesa);
+                List<Mesa> mesa1 = MesasBD.obtenerProductos();
+
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaComanda.getModel();
+                modelo.setRowCount(0);
+
+                if(mesa1 != null){
+                    for(Mesa m: mesa1){
+                        modelo = (DefaultTableModel) tablaComanda.getModel();
+                        modelo.addRow(new Object[]{m.getNum_mesa(), m.getLibre()});
+                    }
+                    tablaComanda.repaint();
+                }
             }
 
         });
@@ -163,12 +168,10 @@ public class Aforo extends JFrame{
     }
     private void rellenarComboProducto(JComboBox comboBox){
 
-        comboBox.addItem("Si");
-        comboBox.addItem("No");
+        comboBox.addItem("Libre");
+        comboBox.addItem("Ocupada");
 
     }
-
-
 
 }
 

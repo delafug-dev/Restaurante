@@ -3,14 +3,13 @@ package windows.cocinero;
 import bbdd.MesasBD;
 import bbdd.PedidoBD;
 import bbdd.Productobd;
+import bbdd.ReservaBD;
 import modelos.Mesa;
 import modelos.ModeloPedido;
 import modelos.Producto;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -103,14 +102,14 @@ public class Window_Comanda extends JFrame {
     private void rellenarComboMesas(JComboBox comboBox){
         List<Mesa> mesa = MesasBD.obtenerMesapedido();
         for(Mesa m : mesa){
-            comboBox.addItem(m.getNum_mesa());
+            comboBox.addItem(m);
         }
 
     }
     private void rellenarComboProducto(JComboBox comboBox){
         List<Producto> producto = Productobd.obtenerProductos();
         for(Producto p : producto){
-            comboBox.addItem(p.getDescripcion());
+            comboBox.addItem(p);
         }
 
     }
@@ -125,7 +124,7 @@ public class Window_Comanda extends JFrame {
         buscarComanda.setBorder(line);
         buscarComanda.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Integer pedido = Integer.valueOf((String.valueOf(comboMesa.getSelectedItem())));
+                Mesa pedido = (Mesa) comboMesa.getSelectedItem();
                 List<ModeloPedido> pedi = PedidoBD.obtenerPormesa(pedido);
 
 
@@ -147,7 +146,7 @@ public class Window_Comanda extends JFrame {
         return buscarComanda;
     }
     private static JButton borrarProducto (){
-        JButton borrar = new JButton("BORRAR");
+        JButton borrar = new JButton("SERVIDO");
         borrar.setForeground(Color.WHITE);
         borrar.setBackground(Color.darkGray);
         Border line = new LineBorder(Color.WHITE);
@@ -155,8 +154,8 @@ public class Window_Comanda extends JFrame {
         borrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModeloPedido pedido = new ModeloPedido();
-                pedido.setProducto(String.valueOf(comboProducto.getSelectedItem()));
-                pedido.setMesa(Integer.parseInt((String.valueOf(comboMesa.getSelectedItem()))));
+                pedido.setProducto((Producto) comboProducto.getSelectedItem());
+                pedido.setMesa((Mesa) comboMesa.getSelectedItem());
                 PedidoBD.eliminarPedidosProducto(pedido);
             }
         });

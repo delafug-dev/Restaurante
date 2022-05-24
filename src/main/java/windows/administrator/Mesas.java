@@ -1,11 +1,8 @@
 package windows.administrator;
 
 import bbdd.MesasBD;
-import bbdd.Productobd;
 import modelos.Libre;
 import modelos.Mesa;
-import modelos.Producto;
-import modelos.Tipoproducto;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -149,7 +146,7 @@ public class Mesas extends JFrame {
     public static JLabel num_comensales(){
         JLabel num_comensales = new JLabel();
         num_comensales.setFont(fuente);
-        num_comensales.setText("Libre");
+        num_comensales.setText("Estado");
 
         num_comensales.setForeground(Color.WHITE);
         return num_comensales;

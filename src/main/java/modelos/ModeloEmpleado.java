@@ -65,11 +65,7 @@ public class ModeloEmpleado {
 
     @Override
     public String toString() {
-        return "ModeloEmpleado{" +
-                "id=" + id +
-                ", codigoEmpleado='" + codigoEmpleado + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                '}';
+        return nombre;
     }
+
 }

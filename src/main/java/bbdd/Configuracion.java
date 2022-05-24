@@ -5,10 +5,12 @@ import java.sql.DriverManager;
 public class Configuracion {
 
 
-        private static final String url = "jdbc:mariadb://34.134.230.192:3306/BBDDPedroAdrianMiguel";
-        private static final String usuario = "alumno_safa_daw";
-        private static final String password = "daw2122";
-
+        //private static final String url = "jdbc:mariadb://34.134.230.192:3306/BBDDPedroAdrianMiguel";
+        //private static final String usuario = "alumno_safa_daw";
+        //private static final String password = "daw2122";
+        private static final String url = "jdbc:mariadb://localhost/resta";
+        private static final String usuario = "root";
+        private static final String password = "root";
 
         static Connection conectarConBD() {
             Connection conexion;
