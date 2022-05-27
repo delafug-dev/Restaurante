@@ -159,8 +159,9 @@ public class Empleado extends JFrame{
             JButton eliminar  = new JButton("Eliminar");
             eliminar.addActionListener(new ActionListener( ) {
                 public void actionPerformed(ActionEvent e) {
-                    ModeloEmpleado empleado = new ModeloEmpleado();
-                    empleado.setId(Integer.parseInt(id.getText()));
+                    //ModeloEmpleado empleado = new ModeloEmpleado();
+                    //empleado.setId(Integer.parseInt(id.getText()));
+                    Integer empleado = Integer.parseInt(id.getText());
                     EmpleadoBD.eliminarEmpleado(empleado);
                 }
             });

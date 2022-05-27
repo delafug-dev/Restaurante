@@ -132,13 +132,13 @@ public class EmpleadoBD extends Configuracion {
     }
 
 
-    public static void eliminarEmpleado(ModeloEmpleado empleado){
+    public static void eliminarEmpleado(Integer empleado){
         Connection con = conectarConBD();
 
         try {
             PreparedStatement delete = con.prepareStatement("delete from empleado where id = ? ");
 
-            delete.setInt(1, empleado.getId());
+            delete.setInt(1, empleado);
 
             //Ejecución del delete
             delete.executeUpdate();
